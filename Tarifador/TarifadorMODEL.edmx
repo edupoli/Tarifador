@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tarifadorModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bilhetes">
+          <Key>
+            <PropertyRef Name="idcdr" />
+          </Key>
+          <Property Name="idcdr" Type="int" Nullable="false" />
+          <Property Name="calldate" Type="datetime" Precision="0" />
+          <Property Name="cnam" Type="varchar" MaxLength="2555" />
+          <Property Name="src" Type="varchar" MaxLength="255" />
+          <Property Name="dst" Type="varchar" MaxLength="255" />
+          <Property Name="tempo" Type="varchar" MaxLength="45" />
+          <Property Name="tipoChamada" Type="varchar" MaxLength="255" />
+          <Property Name="canal" Type="varchar" MaxLength="255" />
+          <Property Name="valor" Type="decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityType Name="gruporamal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="grupotronco">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="255" />
+          <Property Name="operadoraID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="grupousuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="operadora">
+          <Key>
+            <PropertyRef Name="operadoraID" />
+          </Key>
+          <Property Name="operadoraID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo" Type="int" />
+          <Property Name="descricao" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="planotarifacao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="255" />
+          <Property Name="tempoMinimoChamada" Type="varchar" MaxLength="45" />
+          <Property Name="tempoMinimoTarifacao" Type="varchar" MaxLength="45" />
+          <Property Name="operadoraID" Type="int" Nullable="false" />
+          <Property Name="periodicidadeTarifa" Type="varchar" MaxLength="45" />
+          <Property Name="taxaConexao" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="ligacao_0300" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="dddCelular" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="dddFixo" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="localCelular" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="localFixo" Type="decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityType Name="ramal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="numero" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="grupoRamalID" Type="int" Nullable="false" />
+          <Property Name="usuarioID" Type="int" Nullable="false" />
+          <Property Name="servidor" Type="varchar" MaxLength="255" />
+          <Property Name="observacao" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tronco">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="255" />
+          <Property Name="ddd" Type="varchar" MaxLength="45" />
+          <Property Name="numSaida" Type="varchar" MaxLength="45" />
+          <Property Name="planoID" Type="int" Nullable="false" />
+          <Property Name="grupoTroncoID" Type="int" Nullable="false" />
+          <Property Name="operadoraID" Type="int" Nullable="false" />
+          <Property Name="canal" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="255" />
+          <Property Name="emaill" Type="varchar" MaxLength="255" />
+          <Property Name="login" Type="varchar" MaxLength="255" />
+          <Property Name="senha" Type="varchar" MaxLength="255" />
+          <Property Name="perfil" Type="varchar" MaxLength="255" />
+          <Property Name="grupoUserID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="grupoID">
+          <End Role="grupousuario" Type="Self.grupousuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupousuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="grupoUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="grupoRamalID">
+          <End Role="gruporamal" Type="Self.gruporamal" Multiplicity="1" />
+          <End Role="ramal" Type="Self.ramal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gruporamal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ramal">
+              <PropertyRef Name="grupoRamalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="grupoTroncoID">
+          <End Role="grupotronco" Type="Self.grupotronco" Multiplicity="1" />
+          <End Role="tronco" Type="Self.tronco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupotronco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tronco">
+              <PropertyRef Name="grupoTroncoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="opeID">
+          <End Role="operadora" Type="Self.operadora" Multiplicity="1" />
+          <End Role="tronco" Type="Self.tronco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadora">
+              <PropertyRef Name="operadoraID" />
+            </Principal>
+            <Dependent Role="tronco">
+              <PropertyRef Name="operadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="operadoraID">
+          <End Role="operadora" Type="Self.operadora" Multiplicity="1" />
+          <End Role="grupotronco" Type="Self.grupotronco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadora">
+              <PropertyRef Name="operadoraID" />
+            </Principal>
+            <Dependent Role="grupotronco">
+              <PropertyRef Name="operadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="operadoralID">
+          <End Role="operadora" Type="Self.operadora" Multiplicity="1" />
+          <End Role="planotarifacao" Type="Self.planotarifacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadora">
+              <PropertyRef Name="operadoraID" />
+            </Principal>
+            <Dependent Role="planotarifacao">
+              <PropertyRef Name="operadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="planoID">
+          <End Role="planotarifacao" Type="Self.planotarifacao" Multiplicity="1" />
+          <End Role="tronco" Type="Self.tronco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planotarifacao">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tronco">
+              <PropertyRef Name="planoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usuarioID">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="ramal" Type="Self.ramal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ramal">
+              <PropertyRef Name="usuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tarifadorModelStoreContainer">
+          <EntitySet Name="bilhetes" EntityType="Self.bilhetes" Schema="tarifador" store:Type="Tables" />
+          <EntitySet Name="gruporamal" EntityType="Self.gruporamal" Schema="tarifador" store:Type="Tables" />
+          <EntitySet Name="grupotronco" EntityType="Self.grupotronco" Schema="tarifador" store:Type="Tables" />
+          <EntitySet Name="grupousuario" EntityType="Self.grupousuario" Schema="tarifador" store:Type="Tables" />
+          <EntitySet Name="operadora" EntityType="Self.operadora" Schema="tarifador" store:Type="Tables" />
+          <EntitySet Name="planotarifacao" EntityType="Self.planotarifacao" Schema="tarifador" store:Type="Tables" />
+          <EntitySet Name="ramal" EntityType="Self.ramal" Schema="tarifador" store:Type="Tables" />
+          <EntitySet Name="tronco" EntityType="Self.tronco" Schema="tarifador" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="tarifador" store:Type="Tables" />
+          <AssociationSet Name="grupoID" Association="Self.grupoID">
+            <End Role="grupousuario" EntitySet="grupousuario" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="grupoRamalID" Association="Self.grupoRamalID">
+            <End Role="gruporamal" EntitySet="gruporamal" />
+            <End Role="ramal" EntitySet="ramal" />
+          </AssociationSet>
+          <AssociationSet Name="grupoTroncoID" Association="Self.grupoTroncoID">
+            <End Role="grupotronco" EntitySet="grupotronco" />
+            <End Role="tronco" EntitySet="tronco" />
+          </AssociationSet>
+          <AssociationSet Name="opeID" Association="Self.opeID">
+            <End Role="operadora" EntitySet="operadora" />
+            <End Role="tronco" EntitySet="tronco" />
+          </AssociationSet>
+          <AssociationSet Name="operadoraID" Association="Self.operadoraID">
+            <End Role="operadora" EntitySet="operadora" />
+            <End Role="grupotronco" EntitySet="grupotronco" />
+          </AssociationSet>
+          <AssociationSet Name="operadoralID" Association="Self.operadoralID">
+            <End Role="operadora" EntitySet="operadora" />
+            <End Role="planotarifacao" EntitySet="planotarifacao" />
+          </AssociationSet>
+          <AssociationSet Name="planoID" Association="Self.planoID">
+            <End Role="planotarifacao" EntitySet="planotarifacao" />
+            <End Role="tronco" EntitySet="tronco" />
+          </AssociationSet>
+          <AssociationSet Name="usuarioID" Association="Self.usuarioID">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="ramal" EntitySet="ramal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tarifadorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bilhete">
+          <Key>
+            <PropertyRef Name="idcdr" />
+          </Key>
+          <Property Name="idcdr" Type="Int32" Nullable="false" />
+          <Property Name="calldate" Type="DateTime" />
+          <Property Name="cnam" Type="String" MaxLength="2555" FixedLength="false" Unicode="false" />
+          <Property Name="src" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dst" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tempo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="tipoChamada" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="canal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="valor" Type="Decimal" />
+        </EntityType>
+        <EntityType Name="gruporamal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ramals" Relationship="Self.grupoRamalID" FromRole="gruporamal" ToRole="ramal" />
+        </EntityType>
+        <EntityType Name="grupotronco">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="operadoraID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="troncoes" Relationship="Self.grupoTroncoID" FromRole="grupotronco" ToRole="tronco" />
+          <NavigationProperty Name="operadora" Relationship="Self.operadoraID" FromRole="grupotronco" ToRole="operadora" />
+        </EntityType>
+        <EntityType Name="grupousuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuarios" Relationship="Self.grupoID" FromRole="grupousuario" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="operadora">
+          <Key>
+            <PropertyRef Name="operadoraID" />
+          </Key>
+          <Property Name="operadoraID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo" Type="Int32" />
+          <Property Name="descricao" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="grupotroncoes" Relationship="Self.operadoraID" FromRole="operadora" ToRole="grupotronco" />
+          <NavigationProperty Name="troncoes" Relationship="Self.opeID" FromRole="operadora" ToRole="tronco" />
+          <NavigationProperty Name="planotarifacaos" Relationship="Self.operadoralID" FromRole="operadora" ToRole="planotarifacao" />
+        </EntityType>
+        <EntityType Name="planotarifacao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tempoMinimoChamada" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="tempoMinimoTarifacao" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="operadoraID" Type="Int32" Nullable="false" />
+          <Property Name="periodicidadeTarifa" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="taxaConexao" Type="Decimal" />
+          <Property Name="ligacao_0300" Type="Decimal" />
+          <Property Name="dddCelular" Type="Decimal" />
+          <Property Name="dddFixo" Type="Decimal" />
+          <Property Name="localCelular" Type="Decimal" />
+          <Property Name="localFixo" Type="Decimal" />
+          <NavigationProperty Name="operadora" Relationship="Self.operadoralID" FromRole="planotarifacao" ToRole="operadora" />
+          <NavigationProperty Name="troncoes" Relationship="Self.planoID" FromRole="planotarifacao" ToRole="tronco" />
+        </EntityType>
+        <EntityType Name="ramal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="numero" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="grupoRamalID" Type="Int32" Nullable="false" />
+          <Property Name="usuarioID" Type="Int32" Nullable="false" />
+          <Property Name="servidor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="observacao" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="gruporamal" Relationship="Self.grupoRamalID" FromRole="ramal" ToRole="gruporamal" />
+          <NavigationProperty Name="usuario" Relationship="Self.usuarioID" FromRole="ramal" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="tronco">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ddd" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="numSaida" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="planoID" Type="Int32" Nullable="false" />
+          <Property Name="grupoTroncoID" Type="Int32" Nullable="false" />
+          <Property Name="operadoraID" Type="Int32" Nullable="false" />
+          <Property Name="canal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="grupotronco" Relationship="Self.grupoTroncoID" FromRole="tronco" ToRole="grupotronco" />
+          <NavigationProperty Name="operadora" Relationship="Self.opeID" FromRole="tronco" ToRole="operadora" />
+          <NavigationProperty Name="planotarifacao" Relationship="Self.planoID" FromRole="tronco" ToRole="planotarifacao" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="emaill" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="login" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="senha" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="perfil" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="grupoUserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="grupousuario" Relationship="Self.grupoID" FromRole="usuario" ToRole="grupousuario" />
+          <NavigationProperty Name="ramals" Relationship="Self.usuarioID" FromRole="usuario" ToRole="ramal" />
+        </EntityType>
+        <Association Name="grupoRamalID">
+          <End Role="gruporamal" Type="Self.gruporamal" Multiplicity="1" />
+          <End Role="ramal" Type="Self.ramal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="gruporamal">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ramal">
+              <PropertyRef Name="grupoRamalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="grupoTroncoID">
+          <End Role="grupotronco" Type="Self.grupotronco" Multiplicity="1" />
+          <End Role="tronco" Type="Self.tronco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupotronco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tronco">
+              <PropertyRef Name="grupoTroncoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="operadoraID">
+          <End Role="operadora" Type="Self.operadora" Multiplicity="1" />
+          <End Role="grupotronco" Type="Self.grupotronco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadora">
+              <PropertyRef Name="operadoraID" />
+            </Principal>
+            <Dependent Role="grupotronco">
+              <PropertyRef Name="operadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="grupoID">
+          <End Role="grupousuario" Type="Self.grupousuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grupousuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="grupoUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="opeID">
+          <End Role="operadora" Type="Self.operadora" Multiplicity="1" />
+          <End Role="tronco" Type="Self.tronco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadora">
+              <PropertyRef Name="operadoraID" />
+            </Principal>
+            <Dependent Role="tronco">
+              <PropertyRef Name="operadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="operadoralID">
+          <End Role="operadora" Type="Self.operadora" Multiplicity="1" />
+          <End Role="planotarifacao" Type="Self.planotarifacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operadora">
+              <PropertyRef Name="operadoraID" />
+            </Principal>
+            <Dependent Role="planotarifacao">
+              <PropertyRef Name="operadoraID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="planoID">
+          <End Role="planotarifacao" Type="Self.planotarifacao" Multiplicity="1" />
+          <End Role="tronco" Type="Self.tronco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planotarifacao">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tronco">
+              <PropertyRef Name="planoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usuarioID">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="ramal" Type="Self.ramal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ramal">
+              <PropertyRef Name="usuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tarifadorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bilhetes" EntityType="Self.bilhete" />
+          <EntitySet Name="gruporamals" EntityType="Self.gruporamal" />
+          <EntitySet Name="grupotroncoes" EntityType="Self.grupotronco" />
+          <EntitySet Name="grupousuarios" EntityType="Self.grupousuario" />
+          <EntitySet Name="operadoras" EntityType="Self.operadora" />
+          <EntitySet Name="planotarifacaos" EntityType="Self.planotarifacao" />
+          <EntitySet Name="ramals" EntityType="Self.ramal" />
+          <EntitySet Name="troncoes" EntityType="Self.tronco" />
+          <EntitySet Name="usuarios" EntityType="Self.usuario" />
+          <AssociationSet Name="grupoRamalID" Association="Self.grupoRamalID">
+            <End Role="gruporamal" EntitySet="gruporamals" />
+            <End Role="ramal" EntitySet="ramals" />
+          </AssociationSet>
+          <AssociationSet Name="grupoTroncoID" Association="Self.grupoTroncoID">
+            <End Role="grupotronco" EntitySet="grupotroncoes" />
+            <End Role="tronco" EntitySet="troncoes" />
+          </AssociationSet>
+          <AssociationSet Name="operadoraID" Association="Self.operadoraID">
+            <End Role="operadora" EntitySet="operadoras" />
+            <End Role="grupotronco" EntitySet="grupotroncoes" />
+          </AssociationSet>
+          <AssociationSet Name="grupoID" Association="Self.grupoID">
+            <End Role="grupousuario" EntitySet="grupousuarios" />
+            <End Role="usuario" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="opeID" Association="Self.opeID">
+            <End Role="operadora" EntitySet="operadoras" />
+            <End Role="tronco" EntitySet="troncoes" />
+          </AssociationSet>
+          <AssociationSet Name="operadoralID" Association="Self.operadoralID">
+            <End Role="operadora" EntitySet="operadoras" />
+            <End Role="planotarifacao" EntitySet="planotarifacaos" />
+          </AssociationSet>
+          <AssociationSet Name="planoID" Association="Self.planoID">
+            <End Role="planotarifacao" EntitySet="planotarifacaos" />
+            <End Role="tronco" EntitySet="troncoes" />
+          </AssociationSet>
+          <AssociationSet Name="usuarioID" Association="Self.usuarioID">
+            <End Role="usuario" EntitySet="usuarios" />
+            <End Role="ramal" EntitySet="ramals" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tarifadorModelStoreContainer" CdmEntityContainer="tarifadorEntities">
+          <EntitySetMapping Name="bilhetes">
+            <EntityTypeMapping TypeName="tarifadorModel.bilhete">
+              <MappingFragment StoreEntitySet="bilhetes">
+                <ScalarProperty Name="idcdr" ColumnName="idcdr" />
+                <ScalarProperty Name="calldate" ColumnName="calldate" />
+                <ScalarProperty Name="cnam" ColumnName="cnam" />
+                <ScalarProperty Name="src" ColumnName="src" />
+                <ScalarProperty Name="dst" ColumnName="dst" />
+                <ScalarProperty Name="tempo" ColumnName="tempo" />
+                <ScalarProperty Name="tipoChamada" ColumnName="tipoChamada" />
+                <ScalarProperty Name="canal" ColumnName="canal" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gruporamals">
+            <EntityTypeMapping TypeName="tarifadorModel.gruporamal">
+              <MappingFragment StoreEntitySet="gruporamal">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grupotroncoes">
+            <EntityTypeMapping TypeName="tarifadorModel.grupotronco">
+              <MappingFragment StoreEntitySet="grupotronco">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="operadoraID" ColumnName="operadoraID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grupousuarios">
+            <EntityTypeMapping TypeName="tarifadorModel.grupousuario">
+              <MappingFragment StoreEntitySet="grupousuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="operadoras">
+            <EntityTypeMapping TypeName="tarifadorModel.operadora">
+              <MappingFragment StoreEntitySet="operadora">
+                <ScalarProperty Name="operadoraID" ColumnName="operadoraID" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="planotarifacaos">
+            <EntityTypeMapping TypeName="tarifadorModel.planotarifacao">
+              <MappingFragment StoreEntitySet="planotarifacao">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="tempoMinimoChamada" ColumnName="tempoMinimoChamada" />
+                <ScalarProperty Name="tempoMinimoTarifacao" ColumnName="tempoMinimoTarifacao" />
+                <ScalarProperty Name="operadoraID" ColumnName="operadoraID" />
+                <ScalarProperty Name="periodicidadeTarifa" ColumnName="periodicidadeTarifa" />
+                <ScalarProperty Name="taxaConexao" ColumnName="taxaConexao" />
+                <ScalarProperty Name="ligacao_0300" ColumnName="ligacao_0300" />
+                <ScalarProperty Name="dddCelular" ColumnName="dddCelular" />
+                <ScalarProperty Name="dddFixo" ColumnName="dddFixo" />
+                <ScalarProperty Name="localCelular" ColumnName="localCelular" />
+                <ScalarProperty Name="localFixo" ColumnName="localFixo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ramals">
+            <EntityTypeMapping TypeName="tarifadorModel.ramal">
+              <MappingFragment StoreEntitySet="ramal">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="grupoRamalID" ColumnName="grupoRamalID" />
+                <ScalarProperty Name="usuarioID" ColumnName="usuarioID" />
+                <ScalarProperty Name="servidor" ColumnName="servidor" />
+                <ScalarProperty Name="observacao" ColumnName="observacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="troncoes">
+            <EntityTypeMapping TypeName="tarifadorModel.tronco">
+              <MappingFragment StoreEntitySet="tronco">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="ddd" ColumnName="ddd" />
+                <ScalarProperty Name="numSaida" ColumnName="numSaida" />
+                <ScalarProperty Name="planoID" ColumnName="planoID" />
+                <ScalarProperty Name="grupoTroncoID" ColumnName="grupoTroncoID" />
+                <ScalarProperty Name="operadoraID" ColumnName="operadoraID" />
+                <ScalarProperty Name="canal" ColumnName="canal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="tarifadorModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="emaill" ColumnName="emaill" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="perfil" ColumnName="perfil" />
+                <ScalarProperty Name="grupoUserID" ColumnName="grupoUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

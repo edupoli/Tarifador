@@ -1,0 +1,531 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Tarifador.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>Tarifador</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <style>
+        label {
+            font-weight: normal !important;
+        }
+    </style>
+
+        
+    <!-- Font Awesome -->
+      <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css"/>
+      <!-- Animate -->
+      <link href="../../plugins/animate/animate.css" rel="stylesheet" />
+      <!-- Ionicons -->
+      <link rel="stylesheet" href="dist/css/ionicons.min.css"/>
+      <!-- overlayScrollbars -->
+      <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css"/>
+      <!-- DataTables -->
+      <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css"/>
+      <!-- jsGrid -->
+      <link rel="stylesheet" href="../../plugins/jsgrid/jsgrid.min.css">
+      <link rel="stylesheet" href="../../plugins/jsgrid/jsgrid-theme.min.css">
+      <!-- SweetAlert2 -->
+      <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"/>
+      <!-- Toastr -->
+      <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css"/>
+      <!-- daterange picker -->
+      <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css"/>
+      <!-- iCheck for checkboxes and radio inputs -->
+      <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css"/>
+      <!-- Bootstrap Color Picker -->
+      <link rel="stylesheet" href="../../plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css"/>
+      <!-- Tempusdominus Bbootstrap 4 -->
+      <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css"/>
+      <!-- Select2 -->
+      <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css"/>
+      <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"/>
+      <!-- Bootstrap4 Duallistbox -->
+      <link rel="stylesheet" href="../../plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css" />
+      <!-- Theme style -->
+      <link rel="stylesheet" href="../../dist/css/adminlte.min.css"/>
+      <!-- Google Font: Source Sans Pro -->
+      <link href="dist/css/css.css" rel="stylesheet"/>
+
+</head>
+
+    
+<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse layout-navbar-fixed layout-footer-fixed text-sm">
+                <div class="wrapper">
+              <!-- Navbar -->
+              <nav class="main-header navbar navbar-expand navbar-white navbar-light  text-sm">
+                <!-- Left navbar links -->
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                  </li>
+
+                </ul>
+
+                <!-- SEARCH FORM -->
+                <form class="form-inline ml-3">
+                  <div class="input-group input-group-sm">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Pesquisar" aria-label="Search"/>
+                    <div class="input-group-append">
+                      <button class="btn btn-navbar" type="submit">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+                  <style>
+                        a:hover {
+                        background-color: Highlight !important; 
+                        font-weight:bold !important; 
+                        color: #ffffff !important; 
+                    }
+                  </style>
+
+                <!-- Right navbar links -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                      <i class="far fa-bell"></i>
+                      <span class="badge badge-danger navbar-badge" runat="server" id="badge">
+                          <asp:Label Text="" runat="server" ID="lblQTDNotificacao" /></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" runat="server" id="itensNotificacao">
+                      <span class="dropdown-item dropdown-header">
+                          <asp:Label Text="" runat="server" ID="lblNumNotificacao"/>&nbsp;Notificação</span>
+
+                    <div runat="server" id="notfBilhetes">
+                      <div class="dropdown-divider"></div>
+                      <a href="Tarifar.aspx" class="dropdown-item">
+                          <i class="fas fa-search-dollar"></i> Chamadas a bilhetar
+                        <span class="float-right text-muted text-sm">
+                            <asp:Label Text="" runat="server" ID="lblBilhetes" /></span>
+                      </a>
+                    </div>
+
+
+                    <div runat="server" id="notidfRotas">
+                      <div class="dropdown-divider"></div>
+                        <div runat="server" id="notificacao2">
+                      <a href="AddTroncos.aspx" class="dropdown-item">
+                          <i class="fas fa-exclamation-triangle"></i> Rotas Não Cadastradas! 
+                          <!-- o elemento asp:Literal  e utilizado para carregar elementos html dinamicamente.. ver função GerarListaRotasncadastradas(); -->
+                            <asp:Literal ID="RotasNcadastradas" runat="server" />
+                      </a>
+                        </div>
+                    </div>
+                        
+                      <!--<div class="dropdown-divider"></div>
+                      <a href="#" class="dropdown-item">
+                        <i class="fas fa-file mr-2"></i> 3 new reports
+                        <span class="float-right text-muted text-sm">2 days</span>
+                      </a> -->
+                      <div class="dropdown-divider"></div>
+                      <a href="#" class="dropdown-item dropdown-footer">Ver todas Notificações</a>
+                    </div>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
+                        class="fas fa-th-large"></i></a>
+                  </li>
+                </ul>
+              </nav>
+              <!-- /.navbar -->
+
+              <!-- Main Sidebar Container -->
+              <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="home.aspx" class="brand-link">
+              <img src="dist/img/logo.png" alt="Tafifador" class="brand-image img-circle elevation-3"
+                   style="opacity: .8">
+              <span class="brand-text font-weight-normal">Tarifador</span>
+            </a>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                  <!-- Sidebar user panel (optional) -->
+
+
+                  <!-- Sidebar Menu -->
+                  <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar text-sm  flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                      <!-- Add icons to the links using the .nav-icon class
+                           with font-awesome or any other icon font library -->
+                      <li class="nav-item has-treeview menu-open">
+                        <a href="./home.aspx" class="nav-link active">
+                          <i class="nav-icon fas fa-tachometer-alt"></i>
+                          <p>
+                            Dashboard
+                            <i class="right fas fa-angle-left"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="./home.aspx" class="nav-link active">
+                              <i class="nav-icon fas fa-home nav-icon"></i>
+                              <p>Home</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-calculator"></i>
+                          <p>
+                            Plano de Tarifação
+                            <i class="right fas fa-angle-left"></i>
+                          </p>
+                        </a>
+                          <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="Planos.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-success"></i>
+                              <p>Consultar</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="AddPlanoTarifacao.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-info"></i>
+                              <p>Cadastrar</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                        <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-tags"></i>
+                          <p>
+                            Bilhetes
+                            <i class="right fas fa-angle-left"></i>
+                              <span class="badge badge-warning right" runat="server" id="badgeMenu">
+                                  <asp:Label Text="" runat="server" ID="lblQTDBilhetes" /></span>
+                          </p>
+                        </a>
+                          <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="Tarifar.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-success"></i>
+                              <p>Coletar</p>
+                            </a>
+                          </li>
+                            <li class="nav-item">
+                            <a href="Bilhetes.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-info"></i>
+                              <p>Consultar</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-phone-square-alt"></i>
+                          <p>
+                            Operadoras
+                            <i class="right fas fa-angle-left"></i>
+                            
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="Operadoras.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-success"></i>
+                              <p>Consultar</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="AddOperadoras.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-info"></i>
+                              <p>Cadastrar</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      
+                      <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-exchange-alt"></i>
+                          <p>
+                            Troncos
+                            <i class="right fas fa-angle-left"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="Troncos.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-success"></i>
+                              <p>Consultar</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="AddTroncos.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-info"></i>
+                              <p>Cadastrar</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-code-branch"></i>
+                          <p>
+                            Grupo de Troncos
+                            <i class="fas fa-angle-left right"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="GrupoTroncos.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-success"></i>
+                              <p>Consultar</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="AddGrupoTroncos.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-info"></i>
+                              <p>Cadastrar</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      
+                      <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-user"></i>
+                          <p>
+                            Usuários
+                            <i class="fas fa-angle-left right"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="Usuarios.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-success"></i>
+                              <p>Consultar</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="AddUsuarios.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-info"></i>
+                              <p>Cadastrar</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                        <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-users"></i>
+                          <p>
+                            Grupo de Usuários
+                            <i class="fas fa-angle-left right"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="GruposUsuarios.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-success"></i>
+                              <p>Consultar</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="AddGruposUsuarios.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-info"></i>
+                              <p>Cadastrar</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      
+                      <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-fax"></i>
+                          <p>
+                            Ramal
+                            <i class="fas fa-angle-left right"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="Ramais.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-success"></i>
+                              <p>Consultar</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="AddRamal.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-info"></i>
+                              <p>Cadastrar</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-share-alt"></i>
+                          <p>
+                            Grupos de Ramais
+                            <i class="fas fa-angle-left right"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="GrupoRamais.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-success"></i>
+                              <p>Consultar</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="AddGrupoRamais.aspx" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-info"></i>
+                              <p>Cadastrar</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="nav-header">RELATÓRIOS</li>
+                      <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-chart-pie"></i>
+                          <p>
+                            Tipo de Relatório
+                            <i class="fas fa-angle-left right"></i>
+                          </p>
+                        </a>
+                          <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="#" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-blue"></i>
+                              <p>?</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="#" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-pink"></i>
+                              <p>?</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="#" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-yellow"></i>
+                              <p>?</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="#" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-green"></i>
+                              <p>?</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="#" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-white"></i>
+                              <p>?</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="#" class="nav-link">
+                              <i class="far fa-dot-circle nav-icon text-gray"></i>
+                              <p>?</p>
+                            </a>
+                          </li>
+                        </ul>
+                    </li>
+                    </ul>
+                  </nav>
+                  <!-- /.sidebar-menu -->
+                </div>
+                <!-- /.sidebar -->
+              </aside>
+
+              <!-- Control Sidebar -->
+              <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+              </aside>
+              <!-- /.control-sidebar -->
+
+              <!-- Main Footer -->
+              <footer class="main-footer text-sm">
+                <strong>Copyright &copy; 2020 Sercomtel Contact Center.</strong>
+                All rights reserved.
+                <div class="float-right d-none d-sm-inline-block">
+                  <b>Versão</b> 1.0
+                </div>
+              </footer>
+            </div>
+            <!-- ./wrapper -->
+
+            <!-- REQUIRED SCRIPTS -->
+            <!-- jQuery -->
+            <script src="../../plugins/jquery/jquery.min.js"></script>
+            <!-- Bootstrap 4 -->
+            <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- jquery-validation -->
+            <script src="../../plugins/jquery-validation/jquery.validate.min.js"></script>
+            <script src="../../plugins/jquery-validation/additional-methods.min.js"></script>
+            <!-- Select2 -->
+            <script src="../../plugins/select2/js/select2.full.min.js"></script>
+            <!-- Bootstrap4 Duallistbox -->
+            <script src="../../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+            <!-- InputMask -->
+            <script src="../../plugins/moment/moment.min.js"></script>
+            <script src="../../plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+            <!-- date-range-picker -->
+            <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+            <!-- bootstrap color picker -->
+            <script src="../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+            <!-- Tempusdominus Bootstrap 4 -->
+            <script src="../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+            <!-- Bootstrap Switch -->
+            <script src="../../plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+            <!-- overlayScrollbars -->
+            <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+            <!-- DataTables -->
+            <script src="../../plugins/datatables/jquery.dataTables.js"></script>
+            <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+            <!-- ChartJS -->
+            <script src="../../plugins/chart.js/Chart.min.js"></script>
+            <!-- jsGrid -->
+            <script src="../../plugins/jsgrid/demos/db.js"></script>
+            <script src="../../plugins/jsgrid/jsgrid.min.js"></script>
+            <!-- SweetAlert2 -->
+            <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
+            <!-- bs-custom-file-input -->
+            <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+            <!-- Toastr -->
+            <script src="../../plugins/toastr/toastr.min.js"></script>
+            <!-- AdminLTE App -->
+            <script src="../../dist/js/adminlte.min.js"></script>
+            <script src="../../dist/js/adminlte.js"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="../../dist/js/demo.js"></script>
+
+
+
+            <!-- PAGE PLUGINS -->
+            <!-- jQuery Mapael -->
+            <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+            <script src="plugins/raphael/raphael.min.js"></script>
+            <script src="plugins/jquery-mapael/jquery.mapael.min.js"></script>
+            <script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
+            <!-- ChartJS -->
+            <script src="plugins/chart.js/Chart.min.js"></script>
+
+            <!-- PAGE SCRIPTS -->
+            <script src="dist/js/pages/dashboard2.js"></script>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder id="body" runat="server">
+
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+
+</html>

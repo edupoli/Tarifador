@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9841c253c7e44b638789b01c82a0a110" Name="Diagram1">
+        <EntityTypeShape EntityType="tarifadorModel.bilhete" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tarifadorModel.gruporamal" Width="1.5" PointX="10" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tarifadorModel.grupotronco" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tarifadorModel.grupousuario" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tarifadorModel.operadora" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tarifadorModel.planotarifacao" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tarifadorModel.ramal" Width="1.5" PointX="12.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="tarifadorModel.tronco" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tarifadorModel.usuario" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="tarifadorModel.grupoRamalID" ManuallyRouted="false" />
+        <AssociationConnector Association="tarifadorModel.grupoTroncoID" ManuallyRouted="false" />
+        <AssociationConnector Association="tarifadorModel.operadoraID" ManuallyRouted="false" />
+        <AssociationConnector Association="tarifadorModel.grupoID" ManuallyRouted="false" />
+        <AssociationConnector Association="tarifadorModel.opeID" ManuallyRouted="false" />
+        <AssociationConnector Association="tarifadorModel.operadoralID" ManuallyRouted="false" />
+        <AssociationConnector Association="tarifadorModel.planoID" ManuallyRouted="false" />
+        <AssociationConnector Association="tarifadorModel.usuarioID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
