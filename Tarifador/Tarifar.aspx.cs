@@ -266,85 +266,100 @@ namespace Tarifador
                         linha["tipoChamada"] = "Fixo Local";
                         if (tempoChamada < tempoMinimoTarifacao)
                         {
-                            linha["valor"] = localFixo / 2;
+                            linha["valor"] = Math.Round((localFixo / 2), 2);
                         }
-                        decimal meiatarifa = localFixo / 2;
-                        decimal valorporsegundo = meiatarifa / tempoMinimoTarifacao;
-                        decimal adcional = valorporsegundo * periodicidadeTarifa;
-                        decimal tempo = tempoChamada - tempoMinimoTarifacao;
-                        tempo = tempo / periodicidadeTarifa;
-                        decimal valor = tempo * adcional;
-                        decimal valorFinal = valor + meiatarifa + taxaConexao;
-                        decimal valorFinalAredondado = Math.Round(valorFinal, 2);
-                        linha["valor"] = valorFinalAredondado;
+                        else
+                        {
+                            decimal meiatarifa = localFixo / 2;
+                            decimal valorporsegundo = meiatarifa / tempoMinimoTarifacao;
+                            decimal adcional = valorporsegundo * periodicidadeTarifa;
+                            decimal tempo = tempoChamada - tempoMinimoTarifacao;
+                            tempo = tempo / periodicidadeTarifa;
+                            decimal valor = tempo * adcional;
+                            decimal valorFinal = valor + meiatarifa + taxaConexao;
+                            decimal valorFinalAredondado = Math.Round(valorFinal, 2);
+                            linha["valor"] = valorFinalAredondado;
+                        }
                     }
                     if (match_CelularLocal.Success)
                     {
                         linha["tipoChamada"] = "Celular Local";
                         if (tempoChamada < tempoMinimoTarifacao)
                         {
-                            linha["valor"] = localCelular / 2;
+                            linha["valor"] = Math.Round((localCelular / 2), 2);
                         }
-                        decimal meiatarifa = localCelular / 2;
-                        decimal valorporsegundo = meiatarifa / tempoMinimoTarifacao;
-                        decimal adcional = valorporsegundo * periodicidadeTarifa;
-                        decimal tempo = tempoChamada - tempoMinimoTarifacao;
-                        tempo = tempo / periodicidadeTarifa;
-                        decimal valor = tempo * adcional;
-                        decimal valorFinal = valor + meiatarifa + taxaConexao;
-                        decimal valorFinalAredondado = Math.Round(valorFinal, 2);
-                        linha["valor"] = valorFinalAredondado;
+                        else
+                        {
+                            decimal meiatarifa = localCelular / 2;
+                            decimal valorporsegundo = meiatarifa / tempoMinimoTarifacao;
+                            decimal adcional = valorporsegundo * periodicidadeTarifa;
+                            decimal tempo = tempoChamada - tempoMinimoTarifacao;
+                            tempo = tempo / periodicidadeTarifa;
+                            decimal valor = tempo * adcional;
+                            decimal valorFinal = valor + meiatarifa + taxaConexao;
+                            decimal valorFinalAredondado = Math.Round(valorFinal, 2);
+                            linha["valor"] = valorFinalAredondado;
+                        }
                     }
                     if (match_dddLocal.Success)
                     {
                         linha["tipoChamada"] = "DDD Fixo";
                         if (tempoChamada < tempoMinimoTarifacao)
                         {
-                            linha["valor"] = dddFixo / 2;
+                            linha["valor"] = Math.Round((dddFixo / 2), 2);
                         }
-                        decimal meiatarifa = dddFixo / 2;
-                        decimal valorporsegundo = meiatarifa / tempoMinimoTarifacao;
-                        decimal adcional = valorporsegundo * periodicidadeTarifa;
-                        decimal tempo = tempoChamada - tempoMinimoTarifacao;
-                        tempo = tempo / periodicidadeTarifa;
-                        decimal valor = tempo * adcional;
-                        decimal valorFinal = valor + meiatarifa + taxaConexao;
-                        decimal valorFinalAredondado = Math.Round(valorFinal, 2);
-                        linha["valor"] = valorFinalAredondado;
+                        else
+                        {
+                            decimal meiatarifa = dddFixo / 2;
+                            decimal valorporsegundo = meiatarifa / tempoMinimoTarifacao;
+                            decimal adcional = valorporsegundo * periodicidadeTarifa;
+                            decimal tempo = tempoChamada - tempoMinimoTarifacao;
+                            tempo = tempo / periodicidadeTarifa;
+                            decimal valor = tempo * adcional;
+                            decimal valorFinal = valor + meiatarifa + taxaConexao;
+                            decimal valorFinalAredondado = Math.Round(valorFinal, 2);
+                            linha["valor"] = valorFinalAredondado;
+                        }
                     }
                     if (match_dddCelular.Success)
                     {
                         linha["tipoChamada"] = "DDD Celular";
                         if (tempoChamada < tempoMinimoTarifacao)
                         {
-                            linha["valor"] = dddCelular / 2;
+                            linha["valor"] = Math.Round((dddCelular / 2), 2);
                         }
-                        decimal meiatarifa = dddCelular / 2;
-                        decimal valorporsegundo = meiatarifa / tempoMinimoTarifacao;
-                        decimal adcional = valorporsegundo * periodicidadeTarifa;
-                        decimal tempo = tempoChamada - tempoMinimoTarifacao;
-                        tempo = tempo / periodicidadeTarifa;
-                        decimal valor = tempo * adcional;
-                        decimal valorFinal = valor + meiatarifa + taxaConexao;
-                        decimal valorFinalAredondado = Math.Round(valorFinal, 2);
-                        linha["valor"] = valorFinalAredondado;
+                        else
+                        {
+                            decimal meiatarifa = dddCelular / 2;
+                            decimal valorporsegundo = meiatarifa / tempoMinimoTarifacao;
+                            decimal adcional = valorporsegundo * periodicidadeTarifa;
+                            decimal tempo = tempoChamada - tempoMinimoTarifacao;
+                            tempo = tempo / periodicidadeTarifa;
+                            decimal valor = tempo * adcional;
+                            decimal valorFinal = valor + meiatarifa + taxaConexao;
+                            decimal valorFinalAredondado = Math.Round(valorFinal, 2);
+                            linha["valor"] = valorFinalAredondado;
+                        }
                     }
                     if (match_0300.Success)
                     {
                         linha["tipoChamada"] = "0300";
                         if (tempoChamada < tempoMinimoTarifacao)
                         {
-                            linha["valor"] = _0300 / 2;
+                            linha["valor"] = Math.Round((_0300 / 2), 2);
                         }
-                        decimal meiatarifa = _0300 / 2;
-                        decimal valorporsegundo = meiatarifa / tempoMinimoTarifacao;
-                        decimal adcional = valorporsegundo * periodicidadeTarifa;
-                        decimal tempo = tempoChamada - tempoMinimoTarifacao;
-                        tempo = tempo / periodicidadeTarifa;
-                        decimal valor = tempo * adcional;
-                        decimal valorFinal = valor + meiatarifa + taxaConexao;
-                        decimal valorFinalAredondado = Math.Round(valorFinal, 2);
-                        linha["valor"] = valorFinalAredondado;
+                        else
+                        {
+                            decimal meiatarifa = _0300 / 2;
+                            decimal valorporsegundo = meiatarifa / tempoMinimoTarifacao;
+                            decimal adcional = valorporsegundo * periodicidadeTarifa;
+                            decimal tempo = tempoChamada - tempoMinimoTarifacao;
+                            tempo = tempo / periodicidadeTarifa;
+                            decimal valor = tempo * adcional;
+                            decimal valorFinal = valor + meiatarifa + taxaConexao;
+                            decimal valorFinalAredondado = Math.Round(valorFinal, 2);
+                            linha["valor"] = valorFinalAredondado;
+                        }
                     }
                     dt.AcceptChanges();
                 }

@@ -166,6 +166,7 @@
     <Content Include="Operadoras.aspx" />
     <Content Include="Planos.aspx" />
     <Content Include="Ramais.aspx" />
+    <Content Include="Simulador.aspx" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -465,6 +466,13 @@
     </Compile>
     <Compile Include="ramal.cs">
       <DependentUpon>TarifadorMODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Simulador.aspx.cs">
+      <DependentUpon>Simulador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Simulador.aspx.designer.cs">
+      <DependentUpon>Simulador.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
