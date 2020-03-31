@@ -18,35 +18,61 @@ namespace Tarifador
             double tempoTotal = TimeSpan.Parse("00:" + tempoChamada).TotalSeconds; //converte o valor de Minuto/Segundos digitados no textbox em Segundos
             if (tempoTotal < int.Parse(tempoMinimoTarifacao)) // compara se o tempo total digitado é menor do que o tempoMinimo de tarifaçao se true considera meia tarifa
             {
-                decimal tarifaMinima = decimal.Parse(valorMinuto.ToString()) / 2;
-                decimal tarifaMinimaArredondada = Math.Round(tarifaMinima, 2);
-                lblResultado.Text = "O Valor da Tarifa calculado é R$" + tarifaMinimaArredondada + "";
-            }
-            else
-            {
-                decimal meiatarifa = decimal.Parse(valorMinuto.ToString()) / 2;
-                decimal valorporsegundo = meiatarifa / int.Parse(tempoMinimoTarifacao);
-                decimal adcional = valorporsegundo * int.Parse(periodicidadeTarifa);
-                double tempoEmSegundos = TimeSpan.Parse("00:" + tempoChamada).TotalSeconds;
-                decimal tempo = decimal.Parse(tempoEmSegundos.ToString()) - int.Parse(tempoMinimoTarifacao);
-                tempo = tempo / int.Parse(periodicidadeTarifa);
-                decimal valor = tempo * adcional;
-                
-                if (taxaConexao != "")
+                if (int.Parse(tempoMinimoTarifacao) > 30)
                 {
-                    decimal taxa = decimal.Parse(taxaConexao.ToString());
-                    decimal valorFinal = valor + meiatarifa + taxa;
-                    decimal valorFinalAredondado = Math.Round(valorFinal, 2);
-                    lblResultado.Text = "O Valor da Tarifa calculado é R$" + valorFinalAredondado + "";
-                    ClientScript.RegisterStartupScript(GetType(), "Popup", "teste();", true);
+                    decimal tarifaMinima = decimal.Parse(valorMinuto.ToString());
+                    decimal tarifaMinimaArredondada = Math.Round(tarifaMinima, 2);
+                    lblResultado.Text = "O Valor da Tarifa calculado é R$" + tarifaMinimaArredondada + "";
                 }
                 else
                 {
-                    decimal valorFinal = valor + meiatarifa;
-                    decimal valorFinalAredondado = Math.Round(valorFinal, 2);
-                    lblResultado.Text = "O Valor da Tarifa calculado é R$" + valorFinalAredondado + "";
-                    ClientScript.RegisterStartupScript(GetType(), "Popup", "teste();", true);
+                    decimal tarifaMinima = decimal.Parse(valorMinuto.ToString()) / 2;
+                    decimal tarifaMinimaArredondada = Math.Round(tarifaMinima, 2);
+                    lblResultado.Text = "O Valor da Tarifa calculado é R$" + tarifaMinimaArredondada + "";
                 }
+                
+            }
+            else
+            {
+                if (tempoTotal > int.Parse(tempoMinimoTarifacao))
+                {
+                    if (int.Parse(tempoMinimoTarifacao) >30)
+                    {
+                        decimal ta = Convert.ToDecimal(tempoTotal) / 60;
+                        decimal arredondado= Math.Ceiling(ta);
+                        decimal valorTotalCobrado = decimal.Parse(valorMinuto) * arredondado;
+                        lblResultado.Text = "O Valor da Tarifa calculado é R$" + valorTotalCobrado + "";
+                        ClientScript.RegisterStartupScript(GetType(), "Popup", "teste();", true);
+
+                    }
+                    else
+                    {
+                        decimal meiatarifa = decimal.Parse(valorMinuto.ToString()) / 2;
+                        decimal valorporsegundo = meiatarifa / int.Parse(tempoMinimoTarifacao);
+                        decimal adcional = valorporsegundo * int.Parse(periodicidadeTarifa);
+                        double tempoEmSegundos = TimeSpan.Parse("00:" + tempoChamada).TotalSeconds;
+                        decimal tempo = decimal.Parse(tempoEmSegundos.ToString()) - int.Parse(tempoMinimoTarifacao);
+                        tempo = tempo / int.Parse(periodicidadeTarifa);
+                        decimal valor = tempo * adcional;
+
+                        if (taxaConexao != "")
+                        {
+                            decimal taxa = decimal.Parse(taxaConexao.ToString());
+                            decimal valorFinal = valor + meiatarifa + taxa;
+                            decimal valorFinalAredondado = Math.Round(valorFinal, 2);
+                            lblResultado.Text = "O Valor da Tarifa calculado é R$" + valorFinalAredondado + "";
+                            ClientScript.RegisterStartupScript(GetType(), "Popup", "teste();", true);
+                        }
+                        else
+                        {
+                            decimal valorFinal = valor + meiatarifa;
+                            decimal valorFinalAredondado = Math.Round(valorFinal, 2);
+                            lblResultado.Text = "O Valor da Tarifa calculado é R$" + valorFinalAredondado + "";
+                            ClientScript.RegisterStartupScript(GetType(), "Popup", "teste();", true);
+                        }
+                    }
+                }
+                
                 
             }
         }
