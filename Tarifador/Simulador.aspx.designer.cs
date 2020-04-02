@@ -22,22 +22,13 @@ namespace Tarifador {
         protected global::System.Web.UI.WebControls.TextBox tempoChamada;
         
         /// <summary>
-        /// Controle tempoTarifMinimo.
+        /// Controle cboxFormaCobranca.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tempoTarifMinimo;
-        
-        /// <summary>
-        /// Controle periodicidade.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox periodicidade;
+        protected global::System.Web.UI.WebControls.DropDownList cboxFormaCobranca;
         
         /// <summary>
         /// Controle valor.

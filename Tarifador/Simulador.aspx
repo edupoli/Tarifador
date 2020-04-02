@@ -44,21 +44,16 @@
                     </div>
                   </div>
                 <!-- /.form-group -->
-               <div class="col">
-                    <div class="form-group">
-                      <label>Tempo Mínimo de Tarifação</label>
-                        <asp:TextBox runat="server" ID="tempoTarifMinimo" CssClass="form-control" placeholder="Defina o tempo em Segundos" />
-                        <small>Ex: 30s, todas as chamadas com duração menor que 30s será cobrado meia tarifa</small>
-                    </div>
-                </div>
-                <!-- /.form-group -->
                 <div class="col">
                     <div class="form-group">
-                      <label>Periodicidade de Tarifa</label>
-                        <asp:TextBox runat="server" ID="periodicidade" CssClass="form-control" placeholder="Defina o tempo em Segundos" />
-                        <small>Define a periodo de cobrança, em chamadas com duração superor ao tempo minimo </small>
+                        <label>Forma de Cobrança</label>
+                        <asp:DropDownList runat="server" ID="cboxFormaCobranca" CssClass="form-control">
+                            <asp:ListItem Text="30s / 6s  Cadência 30/6" Value="30/6" />
+                            <asp:ListItem Text="60s / 60s   Minuto Cheio" Value="60/60" />
+                        </asp:DropDownList>
                     </div>
-                </div>
+                </div> 
+               
                 <div class="col">
                     <div class="form-group">
                       <label>Valor por Minuto </label>
@@ -94,12 +89,6 @@
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
 
-
-
-  <script>
-        
-    </script>
-
     <script type="text/javascript">
         function sucesso() {
             toastr.success('Gravado com Sucesso!!!')        
@@ -109,8 +98,8 @@
         function tempoChamada() {
             toastr.error('É necessário informar o tempo de chamada para o calculo!!!')        
         };
-        function tempoTarifMinimo() {
-            toastr.error('É necessário informar o tempo mínimo para o calculo!!!')
+        function tempoMinimoChamada() {
+            toastr.error('O valor do tempo de chamada deve ser superior a 3 Segundos !!!')
         };
         function periodicidade() {
             toastr.error('É necessário informar a periodicidade de tempo para o calculo!!!')
@@ -125,22 +114,17 @@
     </script>
 
     <script type="text/javascript">
-        $(function teste () {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'center-end',
-                showConfirmButton: false,
-                timer: 9000
-            });
-
-
-
-            
+        $(function teste() {
+            const Toast = Swal.mixin({})
                 Toast.fire({
+                    toast: true,
                     type: 'success',
+                    position: 'center-end',
+                    showConfirmButton: false,
+                    timer: 9000,
                     title: ' <%= lblResultado.Text %>'
                 })
-            
+
         });
       </script>
 </asp:Content>

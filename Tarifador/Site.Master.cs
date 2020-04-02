@@ -23,7 +23,12 @@ namespace Tarifador
         protected void Page_Load(object sender, EventArgs e)
         {
             Notificacao();
-            
+            imgUser.ImageUrl = "dist/img/users/"+ Session["img"].ToString();
+            imgUser1.ImageUrl = "dist/img/users/" + Session["img"].ToString();
+            lblNome.Text = Session["nome"].ToString();
+            lblCargo.Text = Session["cargo"].ToString();
+
+
         }
         public void Notificacao()
         {

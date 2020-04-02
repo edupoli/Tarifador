@@ -58,6 +58,15 @@ namespace Tarifador {
         protected global::System.Web.UI.WebControls.TextBox login;
         
         /// <summary>
+        /// Controle senha.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox senha;
+        
+        /// <summary>
         /// Controle cboxPerfil.
         /// </summary>
         /// <remarks>
@@ -85,12 +94,48 @@ namespace Tarifador {
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceGrupoUsuarios;
         
         /// <summary>
-        /// Controle senha.
+        /// Controle cargo.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox senha;
+        protected global::System.Web.UI.WebControls.TextBox cargo;
+        
+        /// <summary>
+        /// Controle lblCaminhoImg.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCaminhoImg;
+        
+        /// <summary>
+        /// Controle imgSel.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgSel;
+        
+        /// <summary>
+        /// Controle img.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload img;
+        
+        /// <summary>
+        /// Controle btnUpload.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpload;
     }
 }

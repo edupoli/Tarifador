@@ -92,6 +92,46 @@
 
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item dropdown user-menu">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        <asp:Image runat="server" ID="imgUser1" CssClass="user-image img-circle elevation-2" alt="User Image"/>
+                      <span class="d-none d-md-inline">
+                          <asp:Label  runat="server" ID="lblNome" />
+                      </span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                      <!-- User image -->
+                      <li class="user-header bg-primary">
+                          <asp:Image  runat="server" ID="imgUser" CssClass="img-circle elevation-2" alt="User Image" />
+                        <p>
+                            <asp:Label  runat="server" ID="lblCargo" />
+                          <small>Membro desde abril 2020</small>
+                        </p>
+                      </li>
+                      <!-- Menu Body -->
+                      <li class="user-body">
+                        <div class="row">
+                          <div class="col-4 text-center">
+                            <a href="#"></a>
+                          </div>
+                          <div class="col-4 text-center">
+                            <a href="#"></a>
+                          </div>
+                          <div class="col-4 text-center">
+                            <a href="#"></a>
+                          </div>
+                        </div>
+                        <!-- /.row -->
+                      </li>
+                      <!-- Menu Footer-->
+                      <li class="user-footer">
+                        <a href="ViewUsuarios.aspx?usuarioID=<%= Session["id"].ToString() %>"  class="btn btn-default btn-flat">Profile</a>
+                        <a href="#" class="btn btn-default btn-flat float-right">Logout</a>
+                      </li>
+                    </ul>
+                  </li>
+
                     <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                       <i class="far fa-bell"></i>
@@ -137,8 +177,13 @@
                         class="fas fa-th-large"></i></a>
                   </li>
                 </ul>
+
+
+
               </nav>
               <!-- /.navbar -->
+
+
 
               <!-- Main Sidebar Container -->
               <aside class="main-sidebar sidebar-dark-primary elevation-4">

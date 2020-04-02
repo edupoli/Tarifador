@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddUsuarios.aspx.cs" Inherits="Tarifador.AddUsuarios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewUsuarios.aspx.cs" Inherits="Tarifador.ViewUsuarios" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="body" runat="server">
     <div class="wrapper">
   <div class="content-wrapper">
@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Cadastro de Usuários</h1>
+            <h1 class="m-0 text-dark">Visualizar Cadastro de Usuários</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">home</a></li>
-              <li class="breadcrumb-item active">Cadastro de Usuários</li>
+              <li class="breadcrumb-item active">Visualizar Cadastro de Usuários</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -28,7 +28,6 @@
           <div class="card-header">
             <h3 class="card-title"><i class="fas fa-user"></i></h3>
             <div class="card-tools">
-              <asp:Button Text="Salvar" CssClass="btn btn-sm btn-info" runat="server" ID="btnSalvar" OnClick="btnSalvar_Click" />
               <asp:Button Text="Voltar" CssClass="btn btn-sm btn-secondary" runat="server" ID="btnVoltar" OnClick="btnVoltar_Click"/>
               <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -41,26 +40,26 @@
                   <div class="col">
                     <div class="form-group">
                       <label>Nome</label>
-                        <asp:TextBox runat="server" ID="nome" CssClass="form-control"  />
+                        <asp:TextBox runat="server" ID="nome" CssClass="form-control" ReadOnly="true" />
                     </div>
                   </div>
                 <!-- /.form-group -->
                 <div class="col">
                     <div class="form-group">
                       <label>E-Mail</label>
-                        <asp:TextBox runat="server" ID="email" CssClass="form-control"  />
+                        <asp:TextBox runat="server" ID="email" CssClass="form-control" ReadOnly="true" />
                     </div>
                 </div>
                <div class="col">
                     <div class="form-group">
                       <label>Login</label>
-                        <asp:TextBox runat="server" ID="login" CssClass="form-control"  />
+                        <asp:TextBox runat="server" ID="login" CssClass="form-control" ReadOnly="true" />
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                       <label>Senha</label>
-                        <asp:TextBox runat="server" ID="senha" CssClass="form-control" type="password" />
+                        <asp:TextBox runat="server" ID="senha" CssClass="form-control" type="password" ReadOnly="true" />
                     </div>
                 </div>
                 <!-- /.form-group -->
@@ -69,7 +68,7 @@
                 <div class="col">
                 <div class="form-group">
                   <label>Perfil</label>
-                    <asp:DropDownList runat="server" ID="cboxPerfil" CssClass="form-control">
+                    <asp:DropDownList runat="server" ID="cboxPerfil" CssClass="form-control" readonly="true">
                         <asp:ListItem Text="Comum"  Value="comum"/>
                         <asp:ListItem Text="Administrador" Value="administrador" />
                     </asp:DropDownList>
@@ -78,28 +77,24 @@
                 <div class="col">
                     <div class="form-group">
                       <label>Grupo</label>
-                        <asp:DropDownList runat="server" ID="cboxGrupo" CssClass="form-control" DataSourceID="SqlDataSourceGrupoUsuarios" DataTextField="nome" DataValueField="id">
+                        <asp:DropDownList runat="server" ID="cboxGrupo" CssClass="form-control" ReadOnly="true" >
                         </asp:DropDownList>
-                        <asp:SqlDataSource ID="SqlDataSourceGrupoUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:tarifadorConnectionString %>" ProviderName="<%$ ConnectionStrings:tarifadorConnectionString.ProviderName %>" SelectCommand="SELECT id, nome FROM grupousuario"></asp:SqlDataSource>
                     </div>
                 </div>
                   <div class="col">
                     <div class="form-group">
                       <label>Cargo</label>
-                        <asp:TextBox runat="server" ID="cargo" CssClass="form-control"   />
+                        <asp:TextBox runat="server" ID="cargo" CssClass="form-control" ReadOnly="true"  />
                     </div>
                 </div>
             </div>
                   <div class="col">
                     <div class="form-group">
-                        <asp:Label Text="" runat="server" ID="lblCaminhoImg" />
                         <asp:Image runat="server" ID="imgSel" Width="160px" Height="160px" />
-                        <asp:FileUpload runat="server" ID="img" ToolTip="Selecione uma Imagem" CssClass="btn btn-secondary" /><br />
-                        <asp:Button runat="server" ID="btnUpload" type="submit" Text="Upload" class="btn btn-primary" OnClick="btnUpload_Click" />
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
       </div>
     </section>
       
@@ -108,17 +103,11 @@
     <script type="text/javascript">
         function sucesso() {
             toastr.success('Gravado com Sucesso!!!')        
-        };
-        function uploadSucesso() {
-            toastr.success('Upload da Imagem feito com Sucesso!!!')        
       };
     </script>
     <script type="text/javascript">
         function erro() {
             toastr.error('Erro ao Gravar!!!')        
-        };
-        function uploadErro() {
-            toastr.error('Erro ao fazer Upload da Imagem!!!')        
       };
     </script>
 

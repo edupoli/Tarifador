@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="tarifadorModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="tarifadorModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="bilhetes">
           <Key>
             <PropertyRef Name="idcdr" />
@@ -101,6 +101,8 @@
           <Property Name="senha" Type="varchar" MaxLength="255" />
           <Property Name="perfil" Type="varchar" MaxLength="255" />
           <Property Name="grupoUserID" Type="int" Nullable="false" />
+          <Property Name="img" Type="varchar" MaxLength="255" />
+          <Property Name="cargo" Type="varchar" MaxLength="255" />
         </EntityType>
         <Association Name="grupoID">
           <End Role="grupousuario" Type="Self.grupousuario" Multiplicity="1" />
@@ -241,8 +243,7 @@
             <End Role="ramal" EntitySet="ramal" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="tarifadorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -358,6 +359,8 @@
           <Property Name="grupoUserID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="grupousuario" Relationship="Self.grupoID" FromRole="usuario" ToRole="grupousuario" />
           <NavigationProperty Name="ramals" Relationship="Self.usuarioID" FromRole="usuario" ToRole="ramal" />
+          <Property Name="img" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="cargo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="grupoRamalID">
           <End Role="gruporamal" Type="Self.gruporamal" Multiplicity="1" />
@@ -600,6 +603,8 @@
           <EntitySetMapping Name="usuarios">
             <EntityTypeMapping TypeName="tarifadorModel.usuario">
               <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+                <ScalarProperty Name="img" ColumnName="img" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="emaill" ColumnName="emaill" />

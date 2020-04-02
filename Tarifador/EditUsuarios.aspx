@@ -38,29 +38,35 @@
           <!-- /.card-header -->
           <div class="card-body">
             <div class="row">
-                  <div class="col-md-4">
+                  <div class="col">
                     <div class="form-group">
                       <label>Nome</label>
                         <asp:TextBox runat="server" ID="nome" CssClass="form-control"  />
                     </div>
                   </div>
                 <!-- /.form-group -->
-                <div class="col-md-4">
+                <div class="col">
                     <div class="form-group">
                       <label>E-Mail</label>
                         <asp:TextBox runat="server" ID="email" CssClass="form-control"  />
                     </div>
                 </div>
-               <div class="col-md-4">
+               <div class="col">
                     <div class="form-group">
                       <label>Login</label>
                         <asp:TextBox runat="server" ID="login" CssClass="form-control"  />
                     </div>
                 </div>
+                <div class="col">
+                    <div class="form-group">
+                      <label>Senha</label>
+                        <asp:TextBox runat="server" ID="senha" CssClass="form-control" type="password" />
+                    </div>
+                </div>
                 <!-- /.form-group -->
             </div>
               <div class="row">
-                <div class="col-md-4">
+                <div class="col">
                 <div class="form-group">
                   <label>Perfil</label>
                     <asp:DropDownList runat="server" ID="cboxPerfil" CssClass="form-control">
@@ -69,7 +75,7 @@
                     </asp:DropDownList>
                 </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col">
                     <div class="form-group">
                       <label>Grupo</label>
                         <asp:DropDownList runat="server" ID="cboxGrupo" CssClass="form-control" DataSourceID="SqlDataSourceGrupoUsuarios" DataTextField="nome" DataValueField="id">
@@ -77,15 +83,23 @@
                         <asp:SqlDataSource ID="SqlDataSourceGrupoUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:tarifadorConnectionString %>" ProviderName="<%$ ConnectionStrings:tarifadorConnectionString.ProviderName %>" SelectCommand="SELECT id, nome FROM grupousuario"></asp:SqlDataSource>
                     </div>
                 </div>
-                <div class="col-md-4">
+                  <div class="col">
                     <div class="form-group">
-                      <label>Senha</label>
-                        <asp:TextBox runat="server" ID="senha" CssClass="form-control" type="password" />
+                      <label>Cargo</label>
+                        <asp:TextBox runat="server" ID="cargo" CssClass="form-control"   />
                     </div>
                 </div>
-             </div>
+            </div>
+                  <div class="col">
+                    <div class="form-group">
+                        <asp:Label Text="" runat="server" ID="lblCaminhoImg" />
+                        <asp:Image runat="server" ID="imgSel" Width="160px" Height="160px" />
+                        <asp:FileUpload runat="server" ID="img" ToolTip="Selecione uma Imagem" CssClass="btn btn-secondary" /><br />
+                        <asp:Button runat="server" ID="btnUpload" type="submit" Text="Upload" class="btn btn-primary" OnClick="btnUpload_Click" />
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
       </div>
     </section>
       
@@ -94,11 +108,17 @@
     <script type="text/javascript">
         function sucesso() {
             toastr.success('Gravado com Sucesso!!!')        
+        };
+        function uploadSucesso() {
+            toastr.success('Upload da Imagem feito com Sucesso!!!')        
       };
     </script>
     <script type="text/javascript">
         function erro() {
             toastr.error('Erro ao Gravar!!!')        
+        };
+        function uploadErro() {
+            toastr.error('Erro ao fazer Upload da Imagem!!!')        
       };
     </script>
 

@@ -34,6 +34,9 @@
               <div class="card-body">
               <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false"  emptydatatext="Não existem Usuários Cadastrados!!" class="table table-bordered table-hover">
               <Columns>
+            <asp:ImageField DataImageUrlField="img" HeaderText="Imagem" DataImageUrlFormatString="dist/img/users/{0}">
+                <ControlStyle Height="40px" Width="40px"  />
+            </asp:ImageField>
             <asp:BoundField DataField="id" HeaderText="ID" />
             <asp:BoundField DataField="nome" HeaderText="Nome" />
             <asp:BoundField DataField="login" HeaderText="Login" />

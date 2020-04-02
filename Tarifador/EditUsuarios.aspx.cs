@@ -17,6 +17,7 @@ namespace Tarifador
             {
                 getUsuarios(usuarioID);
             }
+            lblCaminhoImg.Visible = false;
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)
@@ -31,6 +32,8 @@ namespace Tarifador
                 user.senha = senha.Text.Trim();
                 user.perfil = cboxPerfil.SelectedValue;
                 user.grupoUserID = int.Parse(cboxGrupo.SelectedValue);
+                user.img = lblCaminhoImg.Text;
+                user.cargo = cargo.Text;
                 ctx.SaveChanges();
                 ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
 
@@ -57,7 +60,29 @@ namespace Tarifador
             senha.Text = user.senha;
             cboxPerfil.SelectedValue = user.perfil;
             cboxGrupo.SelectedValue = Convert.ToString(user.grupoUserID);
+            imgSel.ImageUrl = "dist/img/users/" + user.img;
+            lblCaminhoImg.Text = user.img;
+            cargo.Text = user.cargo;
 
+        }
+
+        protected void btnUpload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (img.HasFiles)
+                {
+                    lblCaminhoImg.Text = img.FileName;
+                    img.SaveAs(Server.MapPath("dist/img/users/" + img.FileName));
+                    imgSel.ImageUrl = "dist/img/users/" + img.FileName;
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "uploadSucesso();", true);
+                }
+            }
+            catch (Exception)
+            {
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "uploadErro();", true);
+                throw;
+            }
         }
     }
 }

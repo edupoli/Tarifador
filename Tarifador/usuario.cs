@@ -26,6 +26,8 @@ namespace Tarifador
         public string senha { get; set; }
         public string perfil { get; set; }
         public int grupoUserID { get; set; }
+        public string img { get; set; }
+        public string cargo { get; set; }
     
         public virtual grupousuario grupousuario { get; set; }
         public virtual ICollection<ramal> ramals { get; set; }

@@ -161,11 +161,13 @@
     <Content Include="GrupoRamais.aspx" />
     <Content Include="GruposUsuarios.aspx" />
     <Content Include="GrupoTroncos.aspx" />
+    <Content Include="login.aspx" />
     <Content Include="myWebService.asmx" />
     <Content Include="AddOperadoras.aspx" />
     <Content Include="Operadoras.aspx" />
     <Content Include="Planos.aspx" />
     <Content Include="Ramais.aspx" />
+    <Content Include="RecuperSenha.aspx" />
     <Content Include="Simulador.aspx" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
@@ -199,6 +201,7 @@
     <Content Include="ViewOperadoras.aspx" />
     <Content Include="ViewRamais.aspx" />
     <Content Include="ViewTroncos.aspx" />
+    <Content Include="ViewUsuarios.aspx" />
     <Content Include="VisualizarPlano.aspx" />
     <Content Include="WebForm-jason.aspx" />
     <Content Include="WebForm-teste.aspx" />
@@ -329,6 +332,7 @@
       <DependentUpon>AsterixModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexao.cs" />
+    <Compile Include="Criptografia.cs" />
     <Compile Include="EditGrupoRamais.aspx.cs">
       <DependentUpon>EditGrupoRamais.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -425,6 +429,13 @@
     <Compile Include="home.aspx.designer.cs">
       <DependentUpon>home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="myWebService.asmx.cs">
       <DependentUpon>myWebService.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -466,6 +477,13 @@
     </Compile>
     <Compile Include="ramal.cs">
       <DependentUpon>TarifadorMODEL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RecuperSenha.aspx.cs">
+      <DependentUpon>RecuperSenha.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RecuperSenha.aspx.designer.cs">
+      <DependentUpon>RecuperSenha.aspx</DependentUpon>
     </Compile>
     <Compile Include="Simulador.aspx.cs">
       <DependentUpon>Simulador.aspx</DependentUpon>
@@ -580,6 +598,13 @@
     </Compile>
     <Compile Include="ViewTroncos.aspx.designer.cs">
       <DependentUpon>ViewTroncos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUsuarios.aspx.cs">
+      <DependentUpon>ViewUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewUsuarios.aspx.designer.cs">
+      <DependentUpon>ViewUsuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="VisualizarPlano.aspx.cs">
       <DependentUpon>VisualizarPlano.aspx</DependentUpon>

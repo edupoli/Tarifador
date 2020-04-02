@@ -63,6 +63,7 @@ namespace Tarifador
                                  a.senha,
                                  a.perfil,
                                  grupo = b.nome,
+                                 a.img,
 
                              });
             GridView1.DataSource = resultado.ToList();

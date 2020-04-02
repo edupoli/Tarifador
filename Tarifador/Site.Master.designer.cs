@@ -13,6 +13,42 @@ namespace Tarifador {
     public partial class SiteMaster {
         
         /// <summary>
+        /// Controle imgUser1.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgUser1;
+        
+        /// <summary>
+        /// Controle lblNome.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNome;
+        
+        /// <summary>
+        /// Controle imgUser.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgUser;
+        
+        /// <summary>
+        /// Controle lblCargo.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCargo;
+        
+        /// <summary>
         /// Controle badge.
         /// </summary>
         /// <remarks>
