@@ -27,27 +27,42 @@ namespace Tarifador
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            usuarioID = ((sender as LinkButton).CommandArgument);
-            Response.Redirect("EditGruposUsuarios.aspx?usuarioID=" + usuarioID);
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                usuarioID = ((sender as LinkButton).CommandArgument);
+                Response.Redirect("EditGruposUsuarios.aspx?usuarioID=" + usuarioID);
+            }
+            
         }
 
         protected void btnExcluir_Click(object sender, EventArgs e)
         {
-            try
+            if (Session["perfil"].ToString() != "administrador")
             {
-                int cod = Convert.ToInt32((sender as LinkButton).CommandArgument);
-                tarifadorEntities ctx = new tarifadorEntities();
-                grupousuario gu = ctx.grupousuarios.First(p => p.id == cod);
-                ctx.grupousuarios.Remove(gu);
-                ctx.SaveChanges();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
-                GridView1.DataSource = new tarifador().GetGrupoUsuarios();
-                GridView1.DataBind();
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
-            catch (Exception)
+            else
             {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-                throw;
+                try
+                {
+                    int cod = Convert.ToInt32((sender as LinkButton).CommandArgument);
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    grupousuario gu = ctx.grupousuarios.First(p => p.id == cod);
+                    ctx.grupousuarios.Remove(gu);
+                    ctx.SaveChanges();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                    GridView1.DataSource = new tarifador().GetGrupoUsuarios();
+                    GridView1.DataBind();
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                    //throw;
+                }
             }
         }
     }

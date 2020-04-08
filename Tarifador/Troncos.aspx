@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Troncos</h1>
+            <h1 class="m-0 text-dark">Rotas</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Troncos</li>
+              <li class="breadcrumb-item active">Rotas</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -41,9 +41,9 @@
             
             <asp:TemplateField HeaderText="Ações">
                 <ItemTemplate>
-                    <asp:LinkButton class="btn badge-secondary" Text="" ID="btnVisualizar" runat="server" CommandArgument='<%# Eval("id") %>' OnClick="btnVisualizar_Click" ><i class="far fa-eye"></i></asp:LinkButton>
-                    <asp:LinkButton class="btn badge-info" Text="" ID="btnEditar" runat="server" CommandArgument='<%# Eval("id") %>' OnClick="btnEditar_Click" ><i class="fas fa-edit"></i></asp:LinkButton>
-                    <asp:LinkButton class="btn badge-danger" Text="" ID="btnExcluir" runat="server" CommandArgument='<%# Eval("id") %>' OnClick="btnExcluir_Click" OnClientClick="return confirm('Tem Certeza que deseja Excluir ?')" ><i class="fas fa-trash"></i></asp:LinkButton>
+                    <asp:LinkButton class="btn badge-secondary" Text="" ID="btnVisualizar" data-toggle="tooltip" title="Visualizar" runat="server" CommandArgument='<%# Eval("id") %>' OnClick="btnVisualizar_Click" ><i class="far fa-eye"></i></asp:LinkButton>
+                    <asp:LinkButton class="btn badge-info" Text="" ID="btnEditar" data-toggle="tooltip" title="Editar" runat="server" CommandArgument='<%# Eval("id") %>' OnClick="btnEditar_Click" ><i class="fas fa-edit"></i></asp:LinkButton>
+                    <asp:LinkButton class="btn badge-danger" Text="" ID="btnExcluir" data-toggle="tooltip" title="Excluir" runat="server" CommandArgument='<%# Eval("id") %>' OnClick="btnExcluir_Click" OnClientClick="return confirm('Tem Certeza que deseja Excluir ?')" ><i class="fas fa-trash"></i></asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
@@ -75,6 +75,33 @@
     <script type="text/javascript">
         function erro() {
             toastr.error('Erro ao Gravar!!!')        
+      };
+    </script>
+    <script type="text/javascript">
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+    <script type="text/javascript">
+        function acessoNegado() {
+            toastr.options = {
+              "closeButton": false,
+              "debug": false,
+              "newestOnTop": true,
+              "progressBar": true,
+              "positionClass": "toast-top-full-width",
+              "preventDuplicates": true,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "8000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+            toastr["info"]("Acesso somente a usuarios Administradores. ", "Erro")
       };
     </script>
 </asp:Content>

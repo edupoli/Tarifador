@@ -15,7 +15,21 @@ namespace Tarifador
             planoID = Convert.ToInt32(Request.QueryString["planoID"]);
             if (!Page.IsPostBack)
             {
-                buscarPlano(planoID);
+                if (!Page.IsPostBack)
+                {
+                    if (Session["logado"] == null)
+                    {
+                        Response.Redirect("login.aspx");
+                    }
+                    else
+                    if (Session["perfil"].ToString() != "administrador")
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "Popup", "acessoNegado();", true);
+                        Response.Redirect("login.aspx");
+                    }
+                    buscarPlano(planoID);
+                }
+                
             }
         }
 

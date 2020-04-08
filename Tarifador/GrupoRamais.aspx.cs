@@ -28,28 +28,44 @@ namespace Tarifador
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            ramalID = (sender as LinkButton).CommandArgument;
-            Response.Redirect("EditGrupoRamais.aspx?ramalID=" + ramalID);
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                ramalID = (sender as LinkButton).CommandArgument;
+                Response.Redirect("EditGrupoRamais.aspx?ramalID=" + ramalID);
+            }
+            
         }
 
         protected void btnExcluir_Click(object sender, EventArgs e)
         {
-            try
+            if (Session["perfil"].ToString() != "administrador")
             {
-                int cod = Convert.ToInt32((sender as LinkButton).CommandArgument);
-                tarifadorEntities ctx = new tarifadorEntities();
-                gruporamal gr = ctx.gruporamals.First(p => p.id == cod);
-                ctx.gruporamals.Remove(gr);
-                ctx.SaveChanges();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
-                GridView1.DataSource = new tarifador().GetGruporamals();
-                GridView1.DataBind();
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
-            catch (MySqlException ex)
+            else
             {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-                throw (ex);
+                try
+                {
+                    int cod = Convert.ToInt32((sender as LinkButton).CommandArgument);
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    gruporamal gr = ctx.gruporamals.First(p => p.id == cod);
+                    ctx.gruporamals.Remove(gr);
+                    ctx.SaveChanges();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                    GridView1.DataSource = new tarifador().GetGruporamals();
+                    GridView1.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                    //throw (ex);
+                }
             }
+            
         }
         
     }

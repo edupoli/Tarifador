@@ -21,28 +21,45 @@ namespace Tarifador
         }
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            operadoraID = Convert.ToInt32((sender as LinkButton).CommandArgument);
-            Response.Redirect("EditOperadoras.aspx?operadoraID=" + operadoraID);
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                operadoraID = Convert.ToInt32((sender as LinkButton).CommandArgument);
+                Response.Redirect("EditOperadoras.aspx?operadoraID=" + operadoraID);
+            }
+            
         }
         protected void btnExcluir_Click(object sender, EventArgs e)
         {
-            try
+            if (Session["perfil"].ToString() != "administrador")
             {
-                operadoraID = Convert.ToInt32((sender as LinkButton).CommandArgument);
-                int cod = operadoraID;
-                tarifadorEntities ctx = new tarifadorEntities();
-                operadora oper = ctx.operadoras.First(p => p.operadoraID == cod);
-                ctx.operadoras.Remove(oper);
-                ctx.SaveChanges();
-                GridView1.DataSource = new tarifador().GetOperadoras();
-                GridView1.DataBind();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
-            catch (Exception)
+            else
             {
+                try
+                {
+                    operadoraID = Convert.ToInt32((sender as LinkButton).CommandArgument);
+                    int cod = operadoraID;
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    operadora oper = ctx.operadoras.First(p => p.operadoraID == cod);
+                    ctx.operadoras.Remove(oper);
+                    ctx.SaveChanges();
+                    GridView1.DataSource = new tarifador().GetOperadoras();
+                    GridView1.DataBind();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                }
 
-                throw;
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                    //throw;
+                }
             }
+                
         }
 
         protected void btnVisualizar_Click(object sender, EventArgs e)

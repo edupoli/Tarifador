@@ -46,6 +46,8 @@ namespace Tarifador
             getSemanaAnterior();
             totalUsers();
         }
+
+        // Função que mostra na tabela as 10 ligações mais recentes
         private void Listar()
         {
             string sql;
@@ -60,6 +62,8 @@ namespace Tarifador
             GridViewDIALLIST.DataSource = dt;
             GridViewDIALLIST.DataBind();
         }
+
+        // função que verifica a quantidade de usuarios e ramais cadastrados no Elastix
         private void totalUsers()
         {
             con.AbrirCon();
@@ -72,6 +76,8 @@ namespace Tarifador
             boxUsers.InnerText = qtdaUser;
             boxRamais.InnerText=qtdaUser;
         }
+
+        // Função que faz a contabilização do total de chamadas por hora nas ultimas 24horas 
         [WebMethod]
         public static void GetChart()
         {
@@ -108,7 +114,11 @@ namespace Tarifador
             MySqlCommand cmd;
             con.AbrirCon();
             DataTable dt = new DataTable();
+            
+            // faz a contabilizacao de quantidades de chamadas por hora nas ultimas 24horas do dia anterior
             sql = "SELECT HOUR(calldate) AS hora, count(*) AS total FROM asteriskcdrdb.cdr WHERE calldate BETWEEN DATE(NOW()) - INTERVAL 1 DAY AND DATE(NOW()) GROUP BY hora ORDER BY hora DESC limit 24";
+
+            // pega o total geral de chamadas feita no dia anterior
             sql2 = "SELECT count(*) as total FROM asteriskcdrdb.cdr WHERE calldate BETWEEN DATE(NOW()) - INTERVAL 1 DAY AND DATE(NOW())";
             cmd = new MySqlCommand(sql, con.con);
             dr = cmd.ExecuteReader();

@@ -14,6 +14,7 @@ namespace Tarifador
         Conexao con = new Conexao();
         string user;
         string password;
+        public string mensagem = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             user = usuario.Text.Trim();
@@ -47,6 +48,7 @@ namespace Tarifador
                 else
                 {
                     Session["logado"] = "NAO";
+                    mensagem = "Usuário ou senha Inválidos!!";
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
                 }
             }

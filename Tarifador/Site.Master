@@ -36,7 +36,7 @@
       <!-- SweetAlert2 -->
       <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css"/>
       <!-- Toastr -->
-      <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css"/>
+      <link rel="stylesheet" href="../../plugins/toastr/toastr1.css"/>
       <!-- daterange picker -->
       <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css"/>
       <!-- iCheck for checkboxes and radio inputs -->
@@ -75,7 +75,7 @@
 
                   <style>
                         a:hover {
-                        background-color: Highlight !important; 
+                        background-color: #007bff !important; 
                         font-weight:bold !important; 
                         color: #ffffff !important; 
                     }
@@ -135,22 +135,22 @@
 
                     <div runat="server" id="notfBilhetes">
                       <div class="dropdown-divider"></div>
-                      <a href="Tarifar.aspx" class="dropdown-item">
+                        <asp:LinkButton runat="server" CssClass="dropdown-item" ID="notificacaoTarifar" OnClick="notificacaoTarifar_Click" >
                           <i class="fas fa-search-dollar"></i> Chamadas a bilhetar
                         <span class="float-right text-muted text-sm">
                             <asp:Label Text="" runat="server" ID="lblBilhetes" /></span>
-                      </a>
+                        </asp:LinkButton>
                     </div>
 
 
                     <div runat="server" id="notidfRotas">
                       <div class="dropdown-divider"></div>
                         <div runat="server" id="notificacao2">
-                      <a href="AddTroncos.aspx" class="dropdown-item">
-                          <i class="fas fa-exclamation-triangle"></i> Rotas Não Cadastradas! 
-                          <!-- o elemento asp:Literal  e utilizado para carregar elementos html dinamicamente.. ver função GerarListaRotasncadastradas(); -->
-                            <asp:Literal ID="RotasNcadastradas" runat="server" />
-                      </a>
+                            <asp:LinkButton runat="server" ID="notificacaoRotas" CssClass="dropdown-item" OnClick="notificacaoRotas_Click" >
+                              <i class="fas fa-exclamation-triangle"></i> Rotas Não Cadastradas! 
+                                <!-- o elemento asp:Literal  e utilizado para carregar elementos html dinamicamente.. ver função GerarListaRotasncadastradas(); -->
+                                <asp:Literal ID="RotasNcadastradas" runat="server" />
+                            </asp:LinkButton>
                         </div>
                     </div>
                         
@@ -228,10 +228,10 @@
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="AddPlanoTarifacao.aspx" class="nav-link">
+                              <asp:LinkButton  runat="server" CssClass="nav-link" ID="CadasPlanoTarif" OnClick="CadasPlanoTarif_Click">
                               <i class="far fa-dot-circle nav-icon text-info"></i>
                               <p>Cadastrar</p>
-                            </a>
+                              </asp:LinkButton>
                           </li>
                         </ul>
                       </li>
@@ -257,10 +257,10 @@
                         </a>
                           <ul class="nav nav-treeview">
                           <li class="nav-item">
-                            <a href="Tarifar.aspx" class="nav-link">
+                              <asp:LinkButton runat="server" ID="linkTarifar" CssClass="nav-link" OnClick="linkTarifar_Click" >
                               <i class="far fa-dot-circle nav-icon text-success"></i>
                               <p>Coletar</p>
-                            </a>
+                            </asp:LinkButton>
                           </li>
                             <li class="nav-item">
                             <a href="Bilhetes.aspx" class="nav-link">
@@ -287,10 +287,10 @@
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="AddOperadoras.aspx" class="nav-link">
+                              <asp:LinkButton  runat="server" ID="linkOperadora" CssClass="nav-link" OnClick="linkOperadora_Click" >
                               <i class="far fa-dot-circle nav-icon text-info"></i>
                               <p>Cadastrar</p>
-                            </a>
+                              </asp:linkButton>
                           </li>
                         </ul>
                       </li>
@@ -299,7 +299,7 @@
                         <a href="#" class="nav-link">
                           <i class="nav-icon fas fa-exchange-alt"></i>
                           <p>
-                            Troncos
+                            Rotas
                             <i class="right fas fa-angle-left"></i>
                           </p>
                         </a>
@@ -311,10 +311,10 @@
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="AddTroncos.aspx" class="nav-link">
+                            <asp:LinkButton  runat="server"  ID="linkTronco" CssClass="nav-link" OnClick="linkTronco_Click">
                               <i class="far fa-dot-circle nav-icon text-info"></i>
                               <p>Cadastrar</p>
-                            </a>
+                            </asp:LinkButton>
                           </li>
                         </ul>
                       </li>
@@ -322,7 +322,7 @@
                         <a href="#" class="nav-link">
                           <i class="nav-icon fas fa-code-branch"></i>
                           <p>
-                            Grupo de Troncos
+                            Grupo de Rotas
                             <i class="fas fa-angle-left right"></i>
                           </p>
                         </a>
@@ -334,10 +334,10 @@
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="AddGrupoTroncos.aspx" class="nav-link">
+                              <asp:LinkButton  runat="server" ID="linkGrupoTroncos" CssClass="nav-link" OnClick="linkGrupoTroncos_Click" >
                               <i class="far fa-dot-circle nav-icon text-info"></i>
                               <p>Cadastrar</p>
-                            </a>
+                            </asp:LinkButton>
                           </li>
                         </ul>
                       </li>
@@ -358,10 +358,10 @@
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="AddUsuarios.aspx" class="nav-link">
+                              <asp:LinkButton  runat="server" ID="linkUsuario" CssClass="nav-link" OnClick="linkUsuario_Click" >
                               <i class="far fa-dot-circle nav-icon text-info"></i>
                               <p>Cadastrar</p>
-                            </a>
+                            </asp:LinkButton>
                           </li>
                         </ul>
                       </li>
@@ -381,10 +381,10 @@
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="AddGruposUsuarios.aspx" class="nav-link">
+                              <asp:LinkButton runat="server" ID="linkGrupoUsuario" CssClass="nav-link" OnClick="linkGrupoUsuario_Click" >
                               <i class="far fa-dot-circle nav-icon text-info"></i>
                               <p>Cadastrar</p>
-                            </a>
+                            </asp:LinkButton>
                           </li>
                         </ul>
                       </li>
@@ -405,10 +405,10 @@
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="AddRamal.aspx" class="nav-link">
+                              <asp:LinkButton runat="server" ID="linkRamal" CssClass="nav-link" OnClick="linkRamal_Click" >
                               <i class="far fa-dot-circle nav-icon text-info"></i>
                               <p>Cadastrar</p>
-                            </a>
+                            </asp:LinkButton>
                           </li>
                         </ul>
                       </li>
@@ -428,10 +428,10 @@
                             </a>
                           </li>
                           <li class="nav-item">
-                            <a href="AddGrupoRamais.aspx" class="nav-link">
+                              <asp:LinkButton runat="server" ID="linkGrupoRamais" CssClass="nav-link" OnClick="linkGrupoRamais_Click" >
                               <i class="far fa-dot-circle nav-icon text-info"></i>
                               <p>Cadastrar</p>
-                            </a>
+                            </asp:LinkButton>
                           </li>
                         </ul>
                       </li>
@@ -545,7 +545,7 @@
             <!-- bs-custom-file-input -->
             <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
             <!-- Toastr -->
-            <script src="../../plugins/toastr/toastr.min.js"></script>
+            <script src="../../plugins/toastr/toastr.js"></script>
             <!-- AdminLTE App -->
             <script src="../../dist/js/adminlte.min.js"></script>
             <script src="../../dist/js/adminlte.js"></script>
@@ -565,6 +565,29 @@
 
             <!-- PAGE SCRIPTS -->
             <script src="dist/js/pages/dashboard2.js"></script>
+
+        <script type="text/javascript">
+        function acessoNegado() {
+            toastr.options = {
+              "closeButton": false,
+              "debug": false,
+              "newestOnTop": true,
+              "progressBar": true,
+              "positionClass": "toast-top-full-width",
+              "preventDuplicates": true,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "8000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+            toastr["info"]("Acesso somente a usuarios Administradores. ", "Erro")
+      };
+    </script>
     
     <div>
         <asp:ContentPlaceHolder id="body" runat="server">

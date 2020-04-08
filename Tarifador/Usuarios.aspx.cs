@@ -26,27 +26,43 @@ namespace Tarifador
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            usuarioID = int.Parse((sender as LinkButton).CommandArgument);
-            Response.Redirect("EditUsuarios.aspx?usuarioID=" + usuarioID);
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                usuarioID = int.Parse((sender as LinkButton).CommandArgument);
+                Response.Redirect("EditUsuarios.aspx?usuarioID=" + usuarioID);
+            }
+                
         }
 
         protected void btnExcluir_Click(object sender, EventArgs e)
         {
-            try
+            if (Session["perfil"].ToString() != "administrador")
             {
-                usuarioID = int.Parse((sender as LinkButton).CommandArgument);
-                tarifadorEntities ctx = new tarifadorEntities();
-                usuario user = ctx.usuarios.First(p => p.id == usuarioID);
-                ctx.usuarios.Remove(user);
-                ctx.SaveChanges();
-                getUsuarios();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
-            catch (Exception)
+            else
             {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-                throw;
+                try
+                {
+                    usuarioID = int.Parse((sender as LinkButton).CommandArgument);
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    usuario user = ctx.usuarios.First(p => p.id == usuarioID);
+                    ctx.usuarios.Remove(user);
+                    ctx.SaveChanges();
+                    getUsuarios();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                    //throw;
+                }
             }
+                
             
         }
         private void getUsuarios()

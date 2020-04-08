@@ -77,7 +77,7 @@
         <a href="RecuperSenha.aspx">Esqueci a minha senha</a>
       </p>
       <p class="mb-0">
-        <a href="" class="text-center">Registrar uma nova conta</a>
+        
       </p>
     </div>
     <!-- /.login-card-body -->
@@ -102,7 +102,7 @@
           "debug": false,
           "newestOnTop": false,
           "progressBar": true,
-          "positionClass": "toast-top-right",
+          "positionClass": "toast-top-full-width",
           "preventDuplicates": false,
           "onclick": null,
           "showDuration": "300",
@@ -114,7 +114,7 @@
           "showMethod": "fadeIn",
           "hideMethod": "fadeOut"
         }
-        toastr["success"]("Usuário ou senha Inválidos!!", "Erro")
+        toastr["error"]("<%= mensagem %>")
     });
 </script>
 

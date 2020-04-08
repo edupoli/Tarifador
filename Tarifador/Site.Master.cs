@@ -35,14 +35,14 @@ namespace Tarifador
                 lblCargo.Text = Session["cargo"].ToString();
             }
             
-
+            
 
         }
         public void Notificacao()
         {
             //Faz uma consulta de todas as chamadas a serem tarifadas, salva o resultado da consulta num DataReader e passa o total ao lblBilhetes.text
             con.AbrirCon();
-            MySqlCommand cmd = new MySqlCommand("SELECT count(*) as total FROM asteriskcdrdb.cdr where (calldate between '2020-03-01 00:00:00' and now()) and(dst REGEXP '^0[1-9]{8}$' or dst regexp '^0[0-9]{2}[1-9]{8}$' or dst regexp '^0[9]{1}[1-9]{8}$' or dst regexp '^0[0-9]{2}[9]{1}[1-9]{8}$' or dst regexp '^0[0300]$') and(disposition = 'ANSWERED') and(tarifado is null)", con.con);
+            MySqlCommand cmd = new MySqlCommand("SELECT count(*) as total FROM asteriskcdrdb.cdr where (dst REGEXP '^0[1-9]{8}$' or dst regexp '^0[0-9]{2}[1-9]{8}$' or dst regexp '^0[9]{1}[1-9]{8}$' or dst regexp '^0[0-9]{2}[9]{1}[1-9]{8}$' or dst regexp '^0[0300]$') and(disposition = 'ANSWERED') and(tarifado is null)", con.con);
             cmd.CommandType = CommandType.Text;
             MySqlDataReader drQTDbilhetes;
             drQTDbilhetes = cmd.ExecuteReader();
@@ -56,9 +56,9 @@ namespace Tarifador
             DataTable dt = new DataTable();
             MySqlDataAdapter da = new MySqlDataAdapter();
             sql = "SELECT idcdr,calldate,cnam,src,dst,duration,sec_to_time(duration) as tempo,dstchannel FROM asteriskcdrdb.cdr where" +
-                    "(calldate between '2020-03-16 00:00:00' and now())" +
+              //       "(calldate between '2020-03-16 00:00:00' and now())" +
              //        "and(dstchannel like '%AudioCode3000%')"+
-                    "and(dst REGEXP '^0[1-9]{8}$'" +
+                    "(dst REGEXP '^0[1-9]{8}$'" +
                     "or dst regexp '^0[0-9]{2}[1-9]{8}$'" +
                     "or dst regexp '^0[9]{1}[1-9]{8}$'" +
                     "or dst regexp '^0[0-9]{2}[9]{1}[1-9]{8}$'" +
@@ -163,6 +163,145 @@ namespace Tarifador
         protected void btnProfile_Click(object sender, EventArgs e)
         {
             Response.Redirect("ViewUsuarios.aspx?usuarioID=" + Session["id"].ToString());
+        }
+
+        protected void CadasPlanoTarif_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("~/AddPlanoTarifacao.aspx");
+            }
+        }
+
+        protected void notificacaoTarifar_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("~/Tarifar.aspx");
+            }
+        }
+
+        protected void notificacaoRotas_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("~/AddTroncos.aspx");
+            }
+        }
+
+        protected void linkTarifar_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("~/Tarifar.aspx");
+            }
+        }
+
+        protected void linkOperadora_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("~/AddOperadoras.aspx");
+            }
+            
+        }
+
+        protected void linkTronco_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("~/AddTroncos.aspx");
+            }
+            
+        }
+
+        protected void linkGrupoTroncos_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("AddGrupoTroncos.aspx");
+            }
+            
+        }
+
+        protected void linkUsuario_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("AddUsuarios.aspx");
+            }
+            
+        }
+
+        protected void linkGrupoUsuario_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("AddGruposUsuarios.aspx");
+            }
+            
+        }
+
+        protected void linkRamal_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("AddRamal.aspx");
+            }
+            
+        }
+
+        protected void linkGrupoRamais_Click(object sender, EventArgs e)
+        {
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                Response.Redirect("AddGrupoRamais.aspx");
+            }
+            
         }
     }
 }

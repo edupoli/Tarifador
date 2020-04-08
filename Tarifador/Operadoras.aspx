@@ -63,8 +63,29 @@
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
+    <script type="text/javascript">
+        function erro() {
+            toastr.options = {
+              "closeButton": false,
+              "debug": false,
+              "newestOnTop": true,
+              "progressBar": true,
+              "positionClass": "toast-top-full-width",
+              "preventDuplicates": false,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "8000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+            toastr["error"]("Não é possível deletar esse registro, pois esta sendo utilizado em outra tabela do banco de dados ( ver cadastros de Planos de tarifação)", "Erro")
+      };
+    </script>
 
-</div>
   <script type="text/javascript">
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
@@ -73,10 +94,29 @@
             toastr.success('Deletado com Sucesso!!!')        
       };
     </script>
-    <script type="text/javascript">
-        function erro() {
-            toastr.error('Erro ao Gravar!!!')        
+
+        <script type="text/javascript">
+        function acessoNegado() {
+            toastr.options = {
+              "closeButton": false,
+              "debug": false,
+              "newestOnTop": true,
+              "progressBar": true,
+              "positionClass": "toast-top-full-width",
+              "preventDuplicates": true,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "8000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+            toastr["info"]("Acesso somente a usuarios Administradores. ", "Erro")
       };
     </script>
 
+</div>
 </asp:Content>

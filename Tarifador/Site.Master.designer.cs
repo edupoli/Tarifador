@@ -121,6 +121,15 @@ namespace Tarifador {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl notfBilhetes;
         
         /// <summary>
+        /// Controle notificacaoTarifar.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton notificacaoTarifar;
+        
+        /// <summary>
         /// Controle lblBilhetes.
         /// </summary>
         /// <remarks>
@@ -148,6 +157,15 @@ namespace Tarifador {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl notificacao2;
         
         /// <summary>
+        /// Controle notificacaoRotas.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton notificacaoRotas;
+        
+        /// <summary>
         /// Controle RotasNcadastradas.
         /// </summary>
         /// <remarks>
@@ -155,6 +173,15 @@ namespace Tarifador {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal RotasNcadastradas;
+        
+        /// <summary>
+        /// Controle CadasPlanoTarif.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton CadasPlanoTarif;
         
         /// <summary>
         /// Controle badgeMenu.
@@ -173,6 +200,78 @@ namespace Tarifador {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblQTDBilhetes;
+        
+        /// <summary>
+        /// Controle linkTarifar.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkTarifar;
+        
+        /// <summary>
+        /// Controle linkOperadora.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkOperadora;
+        
+        /// <summary>
+        /// Controle linkTronco.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkTronco;
+        
+        /// <summary>
+        /// Controle linkGrupoTroncos.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkGrupoTroncos;
+        
+        /// <summary>
+        /// Controle linkUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkUsuario;
+        
+        /// <summary>
+        /// Controle linkGrupoUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkGrupoUsuario;
+        
+        /// <summary>
+        /// Controle linkRamal.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkRamal;
+        
+        /// <summary>
+        /// Controle linkGrupoRamais.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkGrupoRamais;
         
         /// <summary>
         /// Controle body.

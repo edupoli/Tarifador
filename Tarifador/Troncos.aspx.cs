@@ -26,26 +26,42 @@ namespace Tarifador
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            troncoID = int.Parse((sender as LinkButton).CommandArgument);
-            Response.Redirect("EditTroncos.aspx?troncoID=" + troncoID);
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                troncoID = int.Parse((sender as LinkButton).CommandArgument);
+                Response.Redirect("EditTroncos.aspx?troncoID=" + troncoID);
+            }
+                
         }
 
         protected void btnExcluir_Click(object sender, EventArgs e)
         {
-            try
+            if (Session["perfil"].ToString() != "administrador")
             {
-                troncoID = int.Parse((sender as LinkButton).CommandArgument);
-                tarifadorEntities ctx = new tarifadorEntities();
-                tronco tr = ctx.troncoes.First(p => p.id == troncoID);
-                ctx.troncoes.Remove(tr);
-                ctx.SaveChanges();
-                getTroncos();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
-            catch (Exception)
+            else
             {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                try
+                {
+                    troncoID = int.Parse((sender as LinkButton).CommandArgument);
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    tronco tr = ctx.troncoes.First(p => p.id == troncoID);
+                    ctx.troncoes.Remove(tr);
+                    ctx.SaveChanges();
+                    getTroncos();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                }
             }
+                
         }
         private void getTroncos()
         {

@@ -15,7 +15,21 @@ namespace Tarifador
             operadoraID = Request.QueryString["operadoraID"];
             if (!Page.IsPostBack)
             {
-                buscaOperadora(int.Parse(operadoraID));
+                if (!Page.IsPostBack)
+                {
+                    if (Session["logado"] == null)
+                    {
+                        Response.Redirect("login.aspx");
+                    }
+                    else
+                     if (Session["perfil"].ToString() != "administrador")
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "Popup", "acessoNegado();", true);
+                        Response.Redirect("login.aspx");
+                    }
+                    buscaOperadora(int.Parse(operadoraID));
+                }
+                
             }
             
         }

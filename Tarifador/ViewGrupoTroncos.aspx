@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Visualizar Grupos de Troncos</h1>
+            <h1 class="m-0 text-dark">Visualizar Grupos de Rotas</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">home</a></li>
-              <li class="breadcrumb-item active">Grupo de Troncos</li>
+              <li class="breadcrumb-item active">Grupo de Rotas</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->

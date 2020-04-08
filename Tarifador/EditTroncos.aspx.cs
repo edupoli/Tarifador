@@ -15,6 +15,16 @@ namespace Tarifador
             troncoID = int.Parse(Request.QueryString["troncoID"]);
             if (!Page.IsPostBack)
             {
+                if (Session["logado"] == null)
+                {
+                    Response.Redirect("login.aspx");
+                }
+                else
+                if (Session["perfil"].ToString() != "administrador")
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "acessoNegado();", true);
+                    Response.Redirect("login.aspx");
+                }
                 getVTroncos(troncoID);
             }
         }

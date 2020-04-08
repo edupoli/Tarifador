@@ -26,28 +26,44 @@ namespace Tarifador
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            ramalID = int.Parse((sender as LinkButton).CommandArgument);
-            Response.Redirect("EditRamais.aspx?ramalID=" + ramalID);
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                ramalID = int.Parse((sender as LinkButton).CommandArgument);
+                Response.Redirect("EditRamais.aspx?ramalID=" + ramalID);
+            }
+                
         }
 
         protected void btnExcluir_Click(object sender, EventArgs e)
         {
-            try
+            if (Session["perfil"].ToString() != "administrador")
             {
-                ramalID = int.Parse((sender as LinkButton).CommandArgument);
-                tarifadorEntities ctx = new tarifadorEntities();
-                ramal ra = ctx.ramals.First(p => p.id == ramalID);
-                ctx.ramals.Remove(ra);
-                ctx.SaveChanges();
-                getRamais();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                try
+                {
+                    ramalID = int.Parse((sender as LinkButton).CommandArgument);
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    ramal ra = ctx.ramals.First(p => p.id == ramalID);
+                    ctx.ramals.Remove(ra);
+                    ctx.SaveChanges();
+                    getRamais();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
 
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                    throw;
+                }
             }
-            catch (Exception)
-            {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-                throw;
-            }
+                
         }
         private void getRamais()
         {

@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Cadastrar Troncos</h1>
+            <h1 class="m-0 text-dark">Cadastrar Rotas</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">home</a></li>
-              <li class="breadcrumb-item active">Troncos</li>
+              <li class="breadcrumb-item active">Rotas</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -112,5 +112,27 @@
 
     <script>
     $('[data-mask]').inputmask()
+    </script>
+    <script type="text/javascript">
+        function acessoNegado() {
+            toastr.options = {
+              "closeButton": false,
+              "debug": false,
+              "newestOnTop": true,
+              "progressBar": true,
+              "positionClass": "toast-top-full-width",
+              "preventDuplicates": true,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "8000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+            toastr["info"]("Acesso restrito a usuarios Administradores. ", "Erro")
+        };
     </script>
 </asp:Content>

@@ -11,7 +11,16 @@ namespace Tarifador
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["logado"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
+            else
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "acessoNegado();", true);
+                Response.Redirect("login.aspx");
+            }
         }
 
         protected void btnSalvar_Click(object sender, EventArgs e)

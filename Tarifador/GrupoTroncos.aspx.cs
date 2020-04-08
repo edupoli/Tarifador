@@ -21,35 +21,51 @@ namespace Tarifador
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            try
+            if (Session["perfil"].ToString() != "administrador")
             {
-                troncoID = Convert.ToInt32((sender as LinkButton).CommandArgument);
-                Response.Redirect("EditGrupoTroncos.aspx?troncoID=" + troncoID);
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
-            catch (Exception)
+            else
             {
+                try
+                {
+                    troncoID = Convert.ToInt32((sender as LinkButton).CommandArgument);
+                    Response.Redirect("EditGrupoTroncos.aspx?troncoID=" + troncoID);
+                }
+                catch (Exception)
+                {
 
-                throw;
+                    throw;
+                }
             }
+                
         }
 
         protected void btnExcluir_Click(object sender, EventArgs e)
         {
-            try
+            if (Session["perfil"].ToString() != "administrador")
             {
-                troncoID = Convert.ToInt32((sender as LinkButton).CommandArgument);
-                tarifadorEntities ctx = new tarifadorEntities();
-                grupotronco gr = ctx.grupotroncoes.First(p => p.id == troncoID);
-                ctx.grupotroncoes.Remove(gr);
-                ctx.SaveChanges();
-                getGrupoTroncos();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
-            catch (Exception)
+            else
             {
-
-                throw;
+                try
+                {
+                    troncoID = Convert.ToInt32((sender as LinkButton).CommandArgument);
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    grupotronco gr = ctx.grupotroncoes.First(p => p.id == troncoID);
+                    ctx.grupotroncoes.Remove(gr);
+                    ctx.SaveChanges();
+                    getGrupoTroncos();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                    //throw;
+                }
             }
+                
         }
         private void getGrupoTroncos()
         {

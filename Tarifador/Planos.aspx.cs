@@ -24,28 +24,44 @@ namespace Tarifador
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            planoID = Convert.ToInt32((sender as LinkButton).CommandArgument);
-            Response.Redirect("EditPlanoTarifacao.aspx?planoID=" + planoID);
+            if (Session["perfil"].ToString() != "administrador")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
+            }
+            else
+            {
+                planoID = Convert.ToInt32((sender as LinkButton).CommandArgument);
+                Response.Redirect("EditPlanoTarifacao.aspx?planoID=" + planoID);
+            }
+                
         }
 
         protected void btnExcluir_Click(object sender, EventArgs e)
         {
-            try
+            if (Session["perfil"].ToString() != "administrador")
             {
-                planoID = Convert.ToInt32((sender as LinkButton).CommandArgument);
-                tarifadorEntities ctx = new tarifadorEntities();
-                planotarifacao pla = ctx.planotarifacaos.First(p => p.id == planoID);
-                ctx.planotarifacaos.Remove(pla);
-                ctx.SaveChanges();
-                GridView1.DataSource = new tarifador().GetPlanotarifacaos();
-                GridView1.DataBind();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "acessoNegado();", true);
             }
-            catch (Exception)
+            else
             {
-
-                throw;
+                try
+                {
+                    planoID = Convert.ToInt32((sender as LinkButton).CommandArgument);
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    planotarifacao pla = ctx.planotarifacaos.First(p => p.id == planoID);
+                    ctx.planotarifacaos.Remove(pla);
+                    ctx.SaveChanges();
+                    GridView1.DataSource = new tarifador().GetPlanotarifacaos();
+                    GridView1.DataBind();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                    //throw;
+                }
             }
+                
         }
 
         protected void btnVisualizar_Click(object sender, EventArgs e)

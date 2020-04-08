@@ -60,7 +60,19 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
+        <style>
+             #toast-container{
+     position: absolute;
+     width: 300px;
+   }
+   .toast-top-center,.toast-bottom-center{
+    left:50%;
+    margin-left: -150px;
+   }
+   .toast-top-full-width,.toast-bottom-full-width{
+    width: 100%!important;
+   }
+        </style>
  
 </div>
   <script type="text/javascript">
@@ -73,7 +85,46 @@
   </script>
     <script type="text/javascript">
         function erro() {
-            toastr.error('Erro ao Deletar!!!')        
+            toastr.options = {
+              "closeButton": false,
+              "debug": false,
+              "newestOnTop": true,
+              "progressBar": true,
+              "positionClass": "toast-top-full-width",
+              "preventDuplicates": true,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "8000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+            toastr["error"]("Não é possível deletar esse registro, pois esta sendo utilizado no cadastro de um ou mais Ramais. ", "Erro")
+      };
+    </script>
+    <script type="text/javascript">
+        function acessoNegado() {
+            toastr.options = {
+              "closeButton": false,
+              "debug": false,
+              "newestOnTop": true,
+              "progressBar": true,
+              "positionClass": "toast-top-full-width",
+              "preventDuplicates": true,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "8000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+            toastr["info"]("Acesso somente a usuarios Administradores. ", "Erro")
       };
     </script>
 </asp:Content>

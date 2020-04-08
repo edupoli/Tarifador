@@ -15,7 +15,20 @@ namespace Tarifador
             usuarioID = Request.QueryString["usuarioID"];
             if (!Page.IsPostBack)
             {
-                getGrupoUsuario(int.Parse(usuarioID));
+                if (!Page.IsPostBack)
+                {
+                    if (Session["logado"] == null)
+                    {
+                        Response.Redirect("login.aspx");
+                    }
+                    else
+                if (Session["perfil"].ToString() != "administrador")
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "Popup", "acessoNegado();", true);
+                        Response.Redirect("login.aspx");
+                    }
+                    getGrupoUsuario(int.Parse(usuarioID));
+                }
             }
         }
 
