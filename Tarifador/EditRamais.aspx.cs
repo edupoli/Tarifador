@@ -10,6 +10,7 @@ namespace Tarifador
     public partial class EditRamais : System.Web.UI.Page
     {
         string ramalID;
+        public string mensagem = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             ramalID = Request.QueryString["ramalID"];
@@ -31,28 +32,38 @@ namespace Tarifador
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-            try
+            if (numero.Text == "")
             {
-                int cod = int.Parse(ramalID);
-                tarifadorEntities ctx = new tarifadorEntities();
-                ramal ra = ctx.ramals.First(p => p.id == cod);
-                ra.numero = numero.Text.Trim();
-                ra.grupoRamalID = int.Parse(cboxGrupoRamais.SelectedValue);
-                ra.usuarioID = int.Parse(cboxUsuario.SelectedValue);
-                ra.servidor = servidor.Text.Trim();
-                ra.observacao = observacao.Text.Trim();
-                ctx.ramals.Add(ra);
-                ctx.SaveChanges();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
-                numero.Text = string.Empty;
-                servidor.Text = string.Empty;
-                observacao.Text = string.Empty;
+                mensagem = "O Numero do ramal é obrigatorio";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
+                numero.Focus();
             }
-            catch (Exception)
+            else
             {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-                throw;
+                try
+                {
+                    int cod = int.Parse(ramalID);
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    ramal ra = ctx.ramals.First(p => p.id == cod);
+                    ra.numero = numero.Text.Trim();
+                    ra.grupoRamalID = int.Parse(cboxGrupoRamais.SelectedValue);
+                    ra.usuarioID = int.Parse(cboxUsuario.SelectedValue);
+                    ra.servidor = servidor.Text.Trim();
+                    ra.observacao = observacao.Text.Trim();
+                    ctx.ramals.Add(ra);
+                    ctx.SaveChanges();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                    numero.Text = string.Empty;
+                    servidor.Text = string.Empty;
+                    observacao.Text = string.Empty;
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                    throw;
+                }
             }
+                
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)

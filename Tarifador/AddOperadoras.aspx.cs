@@ -9,6 +9,7 @@ namespace Tarifador
 {
     public partial class Operadoras : System.Web.UI.Page
     {
+        public string mensagem = "";
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,19 +27,35 @@ namespace Tarifador
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            try
+            if (textCodigo.Text == "")
             {
-                var p = new operadora();
-                p.codigo = Convert.ToInt32(textCodigo.Text);
-                p.descricao = textDescricao.Text;
-                new tarifador().addOperadora(p);
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
-            }
-            catch (Exception)
+                mensagem = "Campo Codigo é obrigatorio";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
+                textCodigo.Focus();
+            }else
+                if (textDescricao.Text == "")
             {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-                
+                mensagem = "Campo Descrição é obrigatorio";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
+                textDescricao.Focus();
             }
+            else
+            {
+                try
+                {
+                    var p = new operadora();
+                    p.codigo = Convert.ToInt32(textCodigo.Text);
+                    p.descricao = textDescricao.Text;
+                    new tarifador().addOperadora(p);
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+
+                }
+            }
+            
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)

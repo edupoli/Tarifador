@@ -63,6 +63,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
@@ -134,6 +135,14 @@
       <LastGenOutput>AsterixModel.cs</LastGenOutput>
     </Content>
     <Content Include="Bilhetes.aspx" />
+    <None Include="Connected Services\ServiceColeta\WebService-Coleta-Bilhetes.disco" />
+    <None Include="Connected Services\ServiceColeta\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceColeta\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceColeta\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="coletar.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -162,7 +171,6 @@
     <Content Include="GruposUsuarios.aspx" />
     <Content Include="GrupoTroncos.aspx" />
     <Content Include="login.aspx" />
-    <Content Include="myWebService.asmx" />
     <Content Include="AddOperadoras.aspx" />
     <Content Include="Operadoras.aspx" />
     <Content Include="Planos.aspx" />
@@ -208,6 +216,7 @@
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
     <Content Include="WebForm3.aspx" />
+    <Content Include="WebService-Coleta-Bilhetes.asmx" />
     <EntityDeploy Include="AsterixModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AsterixModel.Designer.cs</LastGenOutput>
@@ -215,6 +224,7 @@
     <Content Include="AsterixModel.edmx.diagram">
       <DependentUpon>AsterixModel.edmx</DependentUpon>
     </Content>
+    <None Include="Connected Services\ServiceColeta\WebService-Coleta-Bilhetes.wsdl" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="home.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -333,7 +343,19 @@
     <Compile Include="cdr.cs">
       <DependentUpon>AsterixModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="coletar.aspx.cs">
+      <DependentUpon>coletar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="coletar.aspx.designer.cs">
+      <DependentUpon>coletar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Conexao.cs" />
+    <Compile Include="Connected Services\ServiceColeta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Criptografia.cs" />
     <Compile Include="EditGrupoRamais.aspx.cs">
       <DependentUpon>EditGrupoRamais.aspx</DependentUpon>
@@ -438,10 +460,6 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="myWebService.asmx.cs">
-      <DependentUpon>myWebService.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="AddOperadoras.aspx.cs">
       <DependentUpon>AddOperadoras.aspx</DependentUpon>
@@ -651,6 +669,10 @@
     <Compile Include="WebForm3.aspx.designer.cs">
       <DependentUpon>WebForm3.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WebService-Coleta-Bilhetes.asmx.cs">
+      <DependentUpon>WebService-Coleta-Bilhetes.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -675,6 +697,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceColeta\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -31,6 +31,15 @@ namespace Tarifador {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tt;
         
         /// <summary>
+        /// Controle TotalChaMes.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TotalChaMes;
+        
+        /// <summary>
         /// Controle boxRamais.
         /// </summary>
         /// <remarks>

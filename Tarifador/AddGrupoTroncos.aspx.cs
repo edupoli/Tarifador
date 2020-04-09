@@ -9,6 +9,7 @@ namespace Tarifador
 {
     public partial class AddGrupoTroncos : System.Web.UI.Page
     {
+        public string mensagem = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["logado"] == null)
@@ -25,22 +26,32 @@ namespace Tarifador
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            try
+            if (nome.Text == "")
             {
-                tarifadorEntities ctx = new tarifadorEntities();
-                grupotronco gtronco = new grupotronco();
-                gtronco.nome = nome.Text.Trim();
-                gtronco.operadoraID = int.Parse(cboxOperadora.SelectedValue);
-                ctx.grupotroncoes.Add(gtronco);
-                ctx.SaveChanges();
-                nome.Text = "";
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                mensagem = "Campo Nome é obrigatorio";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
+                nome.Focus();
             }
-            catch (Exception)
+            else
             {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                try
+                {
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    grupotronco gtronco = new grupotronco();
+                    gtronco.nome = nome.Text.Trim();
+                    gtronco.operadoraID = int.Parse(cboxOperadora.SelectedValue);
+                    ctx.grupotroncoes.Add(gtronco);
+                    ctx.SaveChanges();
+                    nome.Text = "";
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+
+                }
+            }
                 
-            }
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)

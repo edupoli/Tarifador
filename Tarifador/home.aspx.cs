@@ -33,6 +33,7 @@ namespace Tarifador
         public string[] userRamal = new string[5];
         public string[] numRamal = new string[5];
         public string[] totalRamal = new string[5];
+
         protected void Page_Load(object sender, EventArgs e)
         {
             tt.InnerText = "50";
@@ -45,6 +46,7 @@ namespace Tarifador
             getSemana();
             getSemanaAnterior();
             totalUsers();
+            totalChamadasMes();
         }
 
         // Função que mostra na tabela as 10 ligações mais recentes
@@ -75,6 +77,19 @@ namespace Tarifador
             string qtdaUser = Convert.ToString(dr["total"]);
             boxUsers.InnerText = qtdaUser;
             boxRamais.InnerText=qtdaUser;
+        }
+
+        private void totalChamadasMes()
+        {
+            con.AbrirCon();
+            MySqlCommand cmd = new MySqlCommand("SELECT count(*) as total FROM asteriskcdrdb.cdr WHERE YEAR(calldate) = YEAR(CURRENT_DATE()) AND MONTH(calldate) = MONTH(CURRENT_DATE()) and(dst REGEXP '^0[1-9]{8}$' or dst regexp '^0[0-9]{2}[1-9]{8}$' or dst regexp '^0[9]{1}[1-9]{8}$' or dst regexp '^0[0-9]{2}[9]{1}[1-9]{8}$' or dst regexp '^0[0300]$') and(disposition = 'ANSWERED')", con.con);
+            cmd.CommandType = CommandType.Text;
+            MySqlDataReader dr;
+            dr = cmd.ExecuteReader();
+            dr.Read();
+            string qtdChamadas = Convert.ToString(dr["total"]);
+            TotalChaMes.InnerText = qtdChamadas;
+            
         }
 
         // Função que faz a contabilização do total de chamadas por hora nas ultimas 24horas 

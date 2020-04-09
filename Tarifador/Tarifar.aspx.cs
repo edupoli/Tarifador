@@ -391,6 +391,8 @@ namespace Tarifador
             GridView1.Visible = true;
             GridView1.DataSource = dt;
             GridView1.DataBind();
+            con.FecharCon();
+
         }
         
         
@@ -458,10 +460,10 @@ namespace Tarifador
                     GridView1.Visible = false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Response.Write("<script>alert('" + Server.HtmlEncode(ex.Message) + "')</script>");
+                //throw;
             }
         }
     }

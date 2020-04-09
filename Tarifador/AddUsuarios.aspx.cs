@@ -36,34 +36,68 @@ namespace Tarifador
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            try
+            if (nome.Text =="")
             {
-                string senhaCriptografada = Criptografia.CalculaHash(password);
-                tarifadorEntities ctx = new tarifadorEntities();
-                usuario user = new usuario();
-                user.nome = nome.Text.Trim();
-                user.emaill = email.Text.Trim();
-                user.login = login.Text.Trim();
-                user.senha = senhaCriptografada;
-                user.perfil = cboxPerfil.SelectedValue;
-                user.grupoUserID = int.Parse(cboxGrupo.SelectedValue);
-                user.img = lblCaminhoImg.Text.Trim();
-                user.cargo = cargo.Text.Trim();
-                ctx.usuarios.Add(user);
-                ctx.SaveChanges();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
-                nome.Text = string.Empty;
-                email.Text = string.Empty;
-                login.Text = string.Empty;
-                senha.Text = string.Empty;
-                cboxPerfil.SelectedIndex = -1;
-                cboxGrupo.SelectedIndex = -1;
-            }
-            catch (Exception)
+                mensagem = "O Campo Nome é obrigatório";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
+                nome.Focus();
+            }else
+                if (email.Text == "")
             {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-                throw;
+                mensagem = "O Campo e-mail é obrigatório";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
+                email.Focus();
+            }else
+                if (login.Text == "")
+            {
+                mensagem = "O Campo Login é obrigatório";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
+                login.Focus();
+            }else
+                if (senha.Text == "")
+            {
+                mensagem = "O Campo senha é obrigatório";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
+                senha.Focus();
+            }else
+                if (cargo.Text == "")
+            {
+                mensagem = "O Campo Cargo é obrigatório";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
+                cargo.Focus();
             }
+            else
+            {
+                try
+                {
+                    string senhaCriptografada = Criptografia.CalculaHash(password);
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    usuario user = new usuario();
+                    user.nome = nome.Text.Trim();
+                    user.emaill = email.Text.Trim();
+                    user.login = login.Text.Trim();
+                    user.senha = senhaCriptografada;
+                    user.perfil = cboxPerfil.SelectedValue;
+                    user.grupoUserID = int.Parse(cboxGrupo.SelectedValue);
+                    user.img = lblCaminhoImg.Text.Trim();
+                    user.cargo = cargo.Text.Trim();
+                    ctx.usuarios.Add(user);
+                    ctx.SaveChanges();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                    nome.Text = string.Empty;
+                    email.Text = string.Empty;
+                    login.Text = string.Empty;
+                    senha.Text = string.Empty;
+                    cboxPerfil.SelectedIndex = -1;
+                    cboxGrupo.SelectedIndex = -1;
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                    throw;
+                }
+            }
+            
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)

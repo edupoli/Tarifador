@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Tarifar">
+        <s:complexType />
+      </s:element>
+      <s:element name="TarifarResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TarifarSoapIn">
+    <wsdl:part name="parameters" element="tns:Tarifar" />
+  </wsdl:message>
+  <wsdl:message name="TarifarSoapOut">
+    <wsdl:part name="parameters" element="tns:TarifarResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebService_Coleta_BilhetesSoap">
+    <wsdl:operation name="Tarifar">
+      <wsdl:input message="tns:TarifarSoapIn" />
+      <wsdl:output message="tns:TarifarSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebService_Coleta_BilhetesSoap" type="tns:WebService_Coleta_BilhetesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Tarifar">
+      <soap:operation soapAction="http://tempuri.org/Tarifar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebService_Coleta_BilhetesSoap12" type="tns:WebService_Coleta_BilhetesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Tarifar">
+      <soap12:operation soapAction="http://tempuri.org/Tarifar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService_Coleta_Bilhetes">
+    <wsdl:port name="WebService_Coleta_BilhetesSoap" binding="tns:WebService_Coleta_BilhetesSoap">
+      <soap:address location="http://localhost:51222/WebService-Coleta-Bilhetes.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebService_Coleta_BilhetesSoap12" binding="tns:WebService_Coleta_BilhetesSoap12">
+      <soap12:address location="http://localhost:51222/WebService-Coleta-Bilhetes.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -8,8 +8,8 @@ namespace Tarifador
 {
     public class Conexao
     {
-        public string conec = "SERVER=10.0.2.128;UID=admin;PWD=ask%123;Allow User Variables=True";
-        public string conecLocal = "SERVER=10.0.2.9;UID=ura;PWD=ask123;Allow User Variables=True";
+        public string conec = "SERVER=10.0.2.128;UID=admin;PWD=ask%123;Allow User Variables=True;Pooling=False";
+        public string conecLocal = "SERVER=10.0.2.9;UID=ura;PWD=ask123;Allow User Variables=True;Pooling=False";
         public MySqlConnection con = null;
         public MySqlConnection con2 = null;
         public void AbrirCon()

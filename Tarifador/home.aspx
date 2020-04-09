@@ -77,8 +77,8 @@
               <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-headphones"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Chamadas</span>
-                <span class="info-box-number">760</span>
+                <span class="info-box-text">Total de Chamadas no Mês corrente</span>
+                <span class="info-box-number" runat="server" id="TotalChaMes"></span>
               </div>
               <!-- /.info-box-content -->
             </div>

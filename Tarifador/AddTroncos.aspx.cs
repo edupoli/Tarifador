@@ -9,7 +9,7 @@ namespace Tarifador
 {
     public partial class AddTroncos : System.Web.UI.Page
     {
-        
+        public string mensagem = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["logado"] == null)
@@ -26,27 +26,44 @@ namespace Tarifador
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            try
+            if (nome.Text == "")
             {
-                tronco tr = new tronco();
-                tr.nome = nome.Text.Trim();
-                tr.ddd = ddd.Text.Trim();
-                tr.numSaida = numSaida.Text.Trim();
-                tr.planoID = Convert.ToInt32(cboxPlanoTarificao.SelectedValue);
-                tr.grupoTroncoID = Convert.ToInt32(cboxGrupoTroncos.SelectedValue);
-                tr.operadoraID = Convert.ToInt32(cboxOperadoras.SelectedValue);
-                tr.canal = canal.Text.Trim();
-                tarifadorEntities ctx = new tarifadorEntities();
-                ctx.troncoes.Add(tr);
-                ctx.SaveChanges();
-                Page_Load(sender, e);
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                mensagem = "Campo Nome é obrigatorio";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
+                nome.Focus();
             }
-            catch (Exception)
+            else
+                if (canal.Text == "")
             {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-                
+                mensagem = "Campo Canal é obrigatorio";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
+                canal.Focus();
             }
+            else
+            {
+                try
+                {
+                    tronco tr = new tronco();
+                    tr.nome = nome.Text.Trim();
+                    tr.ddd = ddd.Text.Trim();
+                    tr.numSaida = numSaida.Text.Trim();
+                    tr.planoID = Convert.ToInt32(cboxPlanoTarificao.SelectedValue);
+                    tr.grupoTroncoID = Convert.ToInt32(cboxGrupoTroncos.SelectedValue);
+                    tr.operadoraID = Convert.ToInt32(cboxOperadoras.SelectedValue);
+                    tr.canal = canal.Text.Trim();
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    ctx.troncoes.Add(tr);
+                    ctx.SaveChanges();
+                    Page_Load(sender, e);
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+
+                }
+            }
+            
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)

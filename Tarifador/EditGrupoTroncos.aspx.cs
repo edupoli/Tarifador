@@ -10,6 +10,7 @@ namespace Tarifador
     public partial class EditGrupoTroncos : System.Web.UI.Page
     {
         int troncoID;
+        public string mensagem = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             troncoID = Convert.ToInt32(Request.QueryString["troncoID"]);
@@ -34,20 +35,30 @@ namespace Tarifador
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
+            if (nome.Text == "")
+            {
+                mensagem = "Campo Nome é obrigatorio";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
+                nome.Focus();
+            }
+            else
+            {
+                try
+                {
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    grupotronco gr = ctx.grupotroncoes.First(g => g.id == troncoID);
+                    gr.nome = nome.Text.Trim();
+                    gr.operadoraID = Convert.ToInt32(cboxOperadora.SelectedValue);
+                    ctx.SaveChanges();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                }
+            }
 
-            try
-            {
-                tarifadorEntities ctx = new tarifadorEntities();
-                grupotronco gr = ctx.grupotroncoes.First(g => g.id == troncoID);
-                gr.nome = nome.Text.Trim();
-                gr.operadoraID = Convert.ToInt32(cboxOperadora.SelectedValue);
-                ctx.SaveChanges();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
-            }
-            catch (Exception)
-            {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-            }
+                
 
         }
 

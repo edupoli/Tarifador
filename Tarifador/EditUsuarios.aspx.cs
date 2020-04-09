@@ -18,7 +18,7 @@ namespace Tarifador
             usuarioID = Convert.ToInt32(Request.QueryString["usuarioID"]);
             if (!Page.IsPostBack)
             {
-                if (Session["logado"] != null) // || Session["perfil"].ToString() != "administrador")
+                if (Session["logado"] != null) 
                 {
                     if (Session["perfil"].ToString() != "administrador")
                     {
@@ -37,28 +37,66 @@ namespace Tarifador
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            try
+            if (nome.Text == "")
             {
-                tarifadorEntities ctx = new tarifadorEntities();
-                usuario user = ctx.usuarios.First(p => p.id == usuarioID);
-                user.nome = nome.Text.Trim();
-                user.emaill = email.Text.Trim();
-                user.login = login.Text.Trim();
-                user.senha = senha.Text.Trim();
-                user.perfil = cboxPerfil.SelectedValue;
-                user.grupoUserID = int.Parse(cboxGrupo.SelectedValue);
-                user.img = lblCaminhoImg.Text;
-                user.cargo = cargo.Text;
-                ctx.SaveChanges();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                mensagem = "O Campo Nome é obrigatório";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
+                nome.Focus();
+            }
+            else
+                if (email.Text == "")
+            {
+                mensagem = "O Campo e-mail é obrigatório";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
+                email.Focus();
+            }
+            else
+                if (login.Text == "")
+            {
+                mensagem = "O Campo Login é obrigatório";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
+                login.Focus();
+            }
+            else
+                if (senha.Text == "")
+            {
+                mensagem = "O Campo senha é obrigatório";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
+                senha.Focus();
+            }
+            else
+                if (cargo.Text == "")
+            {
+                mensagem = "O Campo Cargo é obrigatório";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
+                cargo.Focus();
+            }
+            else
+            {
+                try
+                {
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    usuario user = ctx.usuarios.First(p => p.id == usuarioID);
+                    user.nome = nome.Text.Trim();
+                    user.emaill = email.Text.Trim();
+                    user.login = login.Text.Trim();
+                    user.senha = senha.Text.Trim();
+                    user.perfil = cboxPerfil.SelectedValue;
+                    user.grupoUserID = int.Parse(cboxGrupo.SelectedValue);
+                    user.img = lblCaminhoImg.Text;
+                    user.cargo = cargo.Text;
+                    ctx.SaveChanges();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
 
 
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                    throw;
+                }
             }
-            catch (Exception)
-            {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-                throw;
-            }
+                
         }
 
         protected void btnVoltar_Click(object sender, EventArgs e)

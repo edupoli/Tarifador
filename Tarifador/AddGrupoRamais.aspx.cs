@@ -9,6 +9,7 @@ namespace Tarifador
 {
     public partial class AddGrupoRamais : System.Web.UI.Page
     {
+        public string mensagem = "";
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,19 +32,29 @@ namespace Tarifador
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            try
+            if (nome.Text == "")
             {
-                tarifadorEntities ctx = new tarifadorEntities();
-                gruporamal gr = new gruporamal();
-                gr.nome = nome.Text.Trim();
-                ctx.gruporamals.Add(gr);
-                ctx.SaveChanges();
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                mensagem = "Campo Nome é obrigatorio";
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
+                nome.Focus();
             }
-            catch (Exception)
+            else
             {
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                try
+                {
+                    tarifadorEntities ctx = new tarifadorEntities();
+                    gruporamal gr = new gruporamal();
+                    gr.nome = nome.Text.Trim();
+                    ctx.gruporamals.Add(gr);
+                    ctx.SaveChanges();
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
+                }
+                catch (Exception)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                }
             }
+                
         }
     }
 }
