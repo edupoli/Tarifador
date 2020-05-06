@@ -28,6 +28,30 @@ namespace Tarifador
         {
             var ctx = new tarifadorEntities();
             return ctx.planotarifacaos.ToList();
+
+        }
+        public object getPlanos()
+        {
+            tarifadorEntities ctx = new tarifadorEntities();
+            var resultado = (from a in ctx.planotarifacaos
+                             join b in ctx.operadoras on a.operadoraID equals b.operadoraID
+                             select new
+                             {
+                                 a.id,
+                                 a.nome,
+                                 a.tempoMinimoChamada,
+                                 a.tempoMinimoTarifacao,
+                                 a.operadoraID,
+                                 a.periodicidadeTarifa,
+                                 a.taxaConexao,
+                                 a.ligacao_0300,
+                                 a.dddCelular,
+                                 a.dddFixo,
+                                 a.localCelular,
+                                 a.localFixo,
+                                 b.descricao,
+                             }).ToList();
+                            return resultado;
         }
         public List<gruporamal> GetGruporamals()
         {

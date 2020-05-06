@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -88,23 +89,24 @@ namespace Tarifador
                     plano.nome = nome.Text.Trim();
                     plano.operadoraID = Convert.ToInt32(cboxOperadoras.SelectedValue);
                     plano.periodicidadeTarifa = periodicidade.Text.Trim();
-                    plano.taxaConexao = decimal.Parse(taxaConexao.Text.Trim());
+                    plano.taxaConexao = decimal.Parse(taxaConexao.Text.Trim(), CultureInfo.InvariantCulture);
                     plano.tempoMinimoChamada = tempoMinimo.Text.Trim();
                     plano.tempoMinimoTarifacao = tempoTarifMinimo.Text.Trim();
                     plano.ligacao_0300 = decimal.Parse(valor0300.Text.Trim());
-                    plano.dddCelular = decimal.Parse(valorDDDCelular.Text.Trim());
-                    plano.dddFixo = decimal.Parse(valorDDDFixo.Text.Trim());
-                    plano.localCelular = decimal.Parse(valorLocalCelular.Text.Trim());
-                    plano.localFixo = decimal.Parse(valorLocalFixo.Text.Trim());
+                    plano.dddCelular = decimal.Parse(valorDDDCelular.Text.Trim(), CultureInfo.InvariantCulture);
+                    plano.dddFixo = decimal.Parse(valorDDDFixo.Text.Trim(), CultureInfo.InvariantCulture);
+                    plano.localCelular = decimal.Parse(valorLocalCelular.Text.Trim(), CultureInfo.InvariantCulture);
+                    plano.localFixo = decimal.Parse(valorLocalFixo.Text.Trim(), CultureInfo.InvariantCulture);
 
                     tarifadorEntities ctx = new tarifadorEntities();
                     ctx.planotarifacaos.Add(plano);
                     ctx.SaveChanges();
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                    mensagem = "Ocorreu o Seguinte erro: " + ex.Message;
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
                 }
             }
             

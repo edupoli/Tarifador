@@ -76,13 +76,13 @@ namespace Tarifador {
         protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceGrupoUsuarios;
         
         /// <summary>
-        /// Controle servidor.
+        /// Controle btnAddUsuario.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox servidor;
+        protected global::System.Web.UI.WebControls.Button btnAddUsuario;
         
         /// <summary>
         /// Controle observacao.

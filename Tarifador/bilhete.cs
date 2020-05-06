@@ -23,5 +23,6 @@ namespace Tarifador
         public string tipoChamada { get; set; }
         public string canal { get; set; }
         public Nullable<decimal> valor { get; set; }
+        public string duration { get; set; }
     }
 }

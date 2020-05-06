@@ -29,7 +29,7 @@
             <h3 class="card-title"><i class="fas fa-user"></i></h3>
             <div class="card-tools">
               <asp:Button Text="Salvar" CssClass="btn btn-sm btn-info" runat="server" ID="btnSalvar" OnClick="btnSalvar_Click" />
-              <asp:Button Text="Voltar" CssClass="btn btn-sm btn-secondary" runat="server" ID="btnVoltar" OnClick="btnVoltar_Click"/>
+              <asp:Button Text="Voltar" CssClass="btn btn-sm btn-secondary" runat="server" ID="btnVoltar" OnClick="btnVoltar_Click" OnClientClick="voltarPagina();"/>
               <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
               <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-remove"></i></button>
@@ -171,4 +171,10 @@
             toastr["info"]("Acesso restrito a usuarios Administradores. ", "Erro")
         };
     </script>
+    <script type="text/javascript">
+function voltarPagina()
+{
+    history.go(-1);
+}
+</script>
 </asp:Content>

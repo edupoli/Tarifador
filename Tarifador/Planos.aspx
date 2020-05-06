@@ -94,7 +94,7 @@
               "showMethod": "fadeIn",
               "hideMethod": "fadeOut"
             }
-            toastr["error"]("Não é possível deletar esse registro, pois esta sendo utilizado no cadastro de uma ou mais Rotas. ", "Erro")
+            toastr["error"]("<%=mensagem%>")
       };
     </script>
     <script type="text/javascript">

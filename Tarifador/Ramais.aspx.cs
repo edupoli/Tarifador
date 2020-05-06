@@ -77,7 +77,7 @@ namespace Tarifador
                                  a.numero,
                                  grupo = b.nome,
                                  usuario = c.nome,
-                                 a.servidor,
+                                 
                              });
             GridView1.DataSource = resultado.ToList();
             GridView1.DataBind();

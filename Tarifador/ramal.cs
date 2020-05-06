@@ -18,7 +18,6 @@ namespace Tarifador
         public string numero { get; set; }
         public int grupoRamalID { get; set; }
         public int usuarioID { get; set; }
-        public string servidor { get; set; }
         public string observacao { get; set; }
     
         public virtual gruporamal gruporamal { get; set; }

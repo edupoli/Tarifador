@@ -15,13 +15,18 @@ namespace Tarifador
     {
         
         ArrayList dstchannel = new ArrayList();
+
+        // dicionario de dados é como um ArrayList, mais multidimensional
+        Dictionary<string, string> ListRamaisNCadastrados = new Dictionary<string, string>();
+        Dictionary<string, string> myList = new Dictionary<string, string>();
         public ArrayList nCadastrados = new ArrayList();
         Conexao con = new Conexao();
-        int qtdNotificacao = 0;
-        
-        
+        int qtdNotificacao = 0;      
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            ramaisElastix();
             Notificacao();
             if (Session["logado"] == null)
             {
@@ -34,10 +39,39 @@ namespace Tarifador
                 lblNome.Text = Session["nome"].ToString();
                 lblCargo.Text = Session["cargo"].ToString();
             }
-            
-            
 
         }
+
+        public void ramaisElastix()
+        {
+            con.AbrirCon();
+            DataTable dt = new DataTable();
+            MySqlDataAdapter da = new MySqlDataAdapter();
+            MySqlCommand cmd = new MySqlCommand("SELECT user,description FROM asterisk.devices order by user asc", con.con);
+            da.SelectCommand = cmd;
+            da.Fill(dt);
+
+            foreach (DataRow item in dt.Rows)
+            {
+                string dst = item["user"].ToString();
+                string description = item["description"].ToString();
+                myList.Add(dst, description); 
+            }
+            tarifadorEntities ctx = new tarifadorEntities();
+            var resultados = ctx.ramals.ToList();
+
+            foreach (KeyValuePair<string, string> item in myList)
+            {
+                
+                if (!resultados.Any(p => p.numero.Contains(item.Key)))
+                {
+                    ListRamaisNCadastrados.Add(item.Key, item.Value);
+                }
+                
+            }
+
+        }
+
         public void Notificacao()
         {
             //Faz uma consulta de todas as chamadas a serem tarifadas, salva o resultado da consulta num DataReader e passa o total ao lblBilhetes.text
@@ -125,6 +159,11 @@ namespace Tarifador
             {
                 notidfRotas.Visible = false;
             }
+            if (ListRamaisNCadastrados.Count != 0)
+            {
+                qtdNotificacao = qtdNotificacao + ListRamaisNCadastrados.Count;
+                RamaisNcadastrados.Text = GerarListaRamaisNcadastrados();
+            }
             if (qtdNotificacao != 0)
             {
                 badge.Visible = true;
@@ -139,6 +178,17 @@ namespace Tarifador
                 notfBilhetes.Visible = false;
             }
 
+        }
+        public string GerarListaRamaisNcadastrados()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (KeyValuePair<string, string> item in ListRamaisNCadastrados)
+            {
+                sb.Append("<div class='dropdown-divider'></div><a href = 'AddRamal.aspx' class='dropdown-item'>");
+                sb.Append("<i class='fas fa-fax mr-2'></i> Ramal " + item.Key +
+                    " <span class='float-right text-muted text-sm'>Não Cadastrado</span></a><div class='dropdown-divider'></div>");
+            }
+            return sb.ToString();
         }
         public string GerarListaRotasncadastradas()
         {

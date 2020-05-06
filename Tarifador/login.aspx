@@ -1,9 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="Tarifador.login" %>
-
-<!DOCTYPE html>
-
-
-
+﻿<%@ Page Language="C#"  AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="Tarifador.login" %>
 
 <!DOCTYPE html>
 <html>
@@ -26,6 +21,13 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Toastr -->
   <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css"/>
+
+    <script type="text/javascript">
+        function erro() {
+            toastr.error('<%=mensagem%>')
+        };
+    </script>
+
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -88,37 +90,25 @@
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Toastr -->
-<script src="../../plugins/toastr/toastr.min.js"></script>
+<script src="/plugins/toastr/toastr.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
-
-
-<script>
-    $(function erro() {
-        toastr.options = {
-          "closeButton": false,
-          "debug": false,
-          "newestOnTop": false,
-          "progressBar": true,
-          "positionClass": "toast-top-full-width",
-          "preventDuplicates": false,
-          "onclick": null,
-          "showDuration": "300",
-          "hideDuration": "1000",
-          "timeOut": "5000",
-          "extendedTimeOut": "1000",
-          "showEasing": "swing",
-          "hideEasing": "linear",
-          "showMethod": "fadeIn",
-          "hideMethod": "fadeOut"
-        }
-        toastr["error"]("<%= mensagem %>")
-    });
-</script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+    <script src="Scripts/toastr.min.js"></script>
+ <script type="text/javascript">
+     function erro() {
+         $.toast({
+    heading: 'Information',
+    text: 'Now you can add icons to generate different kinds of toasts',
+    showHideTransition: 'slide',
+    icon: 'info'
+})
+     }
+      </script>
 
     
-
 </body>
 </html>

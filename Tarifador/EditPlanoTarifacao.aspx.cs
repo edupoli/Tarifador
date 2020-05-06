@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Tarifador
 {
@@ -110,19 +108,19 @@ namespace Tarifador
                     pla.tempoMinimoTarifacao = tempoTarifMinimo.Text.Trim();
                     pla.operadoraID = Convert.ToInt32(cboxOperadoras.SelectedValue);
                     pla.periodicidadeTarifa = periodicidade.Text.Trim();
-                    pla.taxaConexao = decimal.Parse(taxaConexao.Text.Trim());
-                    pla.ligacao_0300 = decimal.Parse(valor0300.Text.Trim());
-                    pla.dddCelular = decimal.Parse(valorDDDCelular.Text.Trim());
-                    pla.dddFixo = decimal.Parse(valorDDDFixo.Text.Trim());
-                    pla.localCelular = decimal.Parse(valorLocalCelular.Text.Trim());
-                    pla.localFixo = decimal.Parse(valorLocalFixo.Text.Trim());
+                    pla.taxaConexao = decimal.Parse(taxaConexao.Text.Trim(), CultureInfo.InvariantCulture);
+                    pla.ligacao_0300 = decimal.Parse(valor0300.Text.Trim(), CultureInfo.InvariantCulture);
+                    pla.dddCelular = decimal.Parse(valorDDDCelular.Text.Trim(), CultureInfo.InvariantCulture);
+                    pla.dddFixo = decimal.Parse(valorDDDFixo.Text.Trim(), CultureInfo.InvariantCulture);
+                    pla.localCelular = decimal.Parse(valorLocalCelular.Text, CultureInfo.InvariantCulture);
+                    pla.localFixo = decimal.Parse(valorLocalFixo.Text.Trim(), CultureInfo.InvariantCulture);
                     ctx.SaveChanges();
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
-                    throw;
+                    mensagem = "Ocorreu o Seguinte erro: "+ex.Message;
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
                 }
             }
                 
@@ -150,10 +148,10 @@ namespace Tarifador
                 valorLocalCelular.Text = pla.localCelular.ToString();
                 valorLocalFixo.Text = pla.localFixo.ToString();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                mensagem = "Ocorreu o Seguinte erro: " + ex.Message;
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "erroGeral();", true);
             }
         }
     }

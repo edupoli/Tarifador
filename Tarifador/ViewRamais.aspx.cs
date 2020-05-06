@@ -30,7 +30,6 @@ namespace Tarifador
             numero.Text = ra.numero;
             cboxGrupoRamais.SelectedValue = Convert.ToString(ra.grupoRamalID);
             cboxUsuario.SelectedValue = Convert.ToString(ra.usuarioID);
-            servidor.Text = ra.servidor;
         }
     }
 }

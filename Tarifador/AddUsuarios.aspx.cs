@@ -13,6 +13,7 @@ namespace Tarifador
         string password;
         string image;
         public string mensagem;
+        static string prevPage = String.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -29,6 +30,8 @@ namespace Tarifador
                     Response.Redirect("login.aspx");
                 }
                 imgSel.ImageUrl = "dist/img/users/user-160x160.png";
+                lblCaminhoImg.Text = "user-160x160.png";
+                prevPage = Request.UrlReferrer.ToString();
             }
             lblCaminhoImg.Visible = false;
             password = senha.Text;
@@ -42,31 +45,7 @@ namespace Tarifador
                 ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
                 nome.Focus();
             }else
-                if (email.Text == "")
-            {
-                mensagem = "O Campo e-mail é obrigatório";
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
-                email.Focus();
-            }else
-                if (login.Text == "")
-            {
-                mensagem = "O Campo Login é obrigatório";
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
-                login.Focus();
-            }else
-                if (senha.Text == "")
-            {
-                mensagem = "O Campo senha é obrigatório";
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
-                senha.Focus();
-            }else
-                if (cargo.Text == "")
-            {
-                mensagem = "O Campo Cargo é obrigatório";
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
-                cargo.Focus();
-            }
-            else
+                
             {
                 try
                 {
@@ -102,7 +81,9 @@ namespace Tarifador
 
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Usuarios.aspx");
+            //Response.Redirect("Usuarios.aspx");
+            Response.Redirect(prevPage);
+            
         }
 
         protected void btnUpload_Click(object sender, EventArgs e)
@@ -161,7 +142,8 @@ namespace Tarifador
                                 }
                                 catch (Exception ex)
                                 {
-
+                                    mensagem = "Ocerreu o Seguinte erro: " + ex.Message;
+                                    ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
                                 }
                                 // Mensagem se tudo ocorreu bem
                                 imgSel.ImageUrl = "dist/img/users/" + image;
@@ -214,9 +196,10 @@ namespace Tarifador
                 string s = data.ToString().Replace("/", "").Replace(":", "").Replace(" ", "");
                 return Convert.ToInt64(s);
             }
-            catch (Exception erro)
+            catch (Exception ex)
             {
-
+                mensagem = "Ocorreu o Seguinte erro: " + ex.Message;
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
                 throw;
             }
         }

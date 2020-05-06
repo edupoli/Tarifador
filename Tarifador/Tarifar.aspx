@@ -88,6 +88,10 @@
                       </div>
                 </div>
                 <!-- /.form-group -->
+                
+                
+            </div>
+            <div class="row">
                 <div class="col">
                   <div class="form-group">
                     <label>&nbsp;</label>
@@ -95,16 +99,12 @@
                             <div class="input-group-prepend">
                                 <span class="input-group"></span>
                             </div>
-                            <asp:Button Text="Consultar" runat="server" CssClass="btn btn-primary" ID="btnConsultar" OnClick="btnConsultar_Click"/>&nbsp;
-                            <asp:Button Text="Bilhetar" runat="server" CssClass="btn btn-warning" ID="btnBilhetar" OnClick="btnBilhetar_Click" />
+                            <asp:Button Text="Tarifar Por Período" runat="server" CssClass="btn btn-secondary" ID="btnBilhetar" OnClick="btnBilhetar_Click" />&nbsp;&nbsp;
+                            <asp:Button Text="Tarifar todas Chamadas Disponiveis " runat="server" CssClass="btn btn-primary" ID="btnBilhetarGeral" OnClick="btnBilhetarGeral_Click"/>&nbsp;&nbsp;
+                            <asp:Button Text="Retarifar Por Período" runat="server" CssClass="btn btn-danger"  ID="btnRetarifar" OnClick="btnRetarifar_Click"/>
                         </div>
                        </div>
                   </div>
-                <style>
-                    .btn{
-                        font-weight:bold
-                    }
-                </style>
                 
             </div>
         </div>
@@ -181,22 +181,58 @@
       $('[data-toggle="tooltip"]').tooltip()
     })
         function SucessoBilhetes() {
-            toastr.success('Chamadas Bilhetadas com Sucesso!!!')        
+            toastr.success("<%=mensagem%>").css({
+            width: "1200px",
+            "max-width": "1200px"
+        })        
       };
     </script>
     <script type="text/javascript">
+        function InfoGeral() {
+            toastr.info("<%=mensagem%>").css({
+            width: "1200px",
+            "max-width": "1200px"
+        })
+        }
+    </script>
+    <script type="text/javascript">
+        function ErroGeral() {
+            toastr.error("<%=mensagem%>").css({
+            width: "1200px",
+            "max-width": "1200px"
+        })
+        }
+    </script>
+    <style>
+        #toast-container > div {
+           opacity: 1;
+        }
+        .toast-top-full-width,.toast-bottom-full-width{
+        width: 100%!important;
+       }
+    </style>
+    <script type="text/javascript">
         function erro() {
-            toastr.error('Favor definir as datas de Inicio e Fim para pesquisa!!!')        
+            toastr.error('Favor definir as datas de Inicio e Fim para pesquisa!!!').css({
+            width: "1200px",
+            "max-width": "1200px"
+        })        
       };
     </script>
     <script type="text/javascript">
         function erroDatatable() {
-            toastr.error('Você deve primeiro Carregar as chamadas a serem bilhetadas utilizando a consulta!!!')        
+            toastr.error('Você deve primeiro Carregar as chamadas a serem bilhetadas utilizando a consulta!!!').css({
+            width: "1200px",
+            "max-width": "1200px"
+        })        
       };
     </script>
     <script type="text/javascript">
         function erroBilhetagem() {
-            toastr.error('Não é possivel Bilhetar Chamadas que estejam sem Rotas Cadastradas!!!')        
+            toastr.error('Não é possivel Bilhetar Chamadas que estejam sem Rotas Cadastradas!!!').css({
+            width: "1200px",
+            "max-width": "1200px"
+        })        
       };
     </script>
     <script>

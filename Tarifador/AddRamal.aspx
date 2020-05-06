@@ -63,8 +63,9 @@
                 </div>
                   <div class="col">
                     <div class="form-group">
-                      <label>Servidor</label>
-                        <asp:TextBox runat="server" ID="servidor" CssClass="form-control"  />
+                      <label>Cadastrar</label>
+                        <asp:Button Text="Cadastrar Novo Usuário" CssClass="btn btn-primary form-control" runat="server" ID="btnAddUsuario" OnClick="btnAddUsuario_Click"/>
+                        
                     </div>
                 </div>
                 

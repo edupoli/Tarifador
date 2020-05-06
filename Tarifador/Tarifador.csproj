@@ -148,6 +148,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="EditGrupoRamais.aspx" />
     <Content Include="EditGruposUsuarios.aspx" />
     <Content Include="EditGrupoTroncos.aspx" />
@@ -176,6 +178,8 @@
     <Content Include="Planos.aspx" />
     <Content Include="Ramais.aspx" />
     <Content Include="RecuperSenha.aspx" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Simulador.aspx" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
@@ -225,6 +229,8 @@
       <DependentUpon>AsterixModel.edmx</DependentUpon>
     </Content>
     <None Include="Connected Services\ServiceColeta\WebService-Coleta-Bilhetes.wsdl" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="home.aspx" />
     <Content Include="Scripts\bootstrap.js" />

@@ -144,7 +144,10 @@
               "showMethod": "fadeIn",
               "hideMethod": "fadeOut"
             }
-            toastr["error"]("<%= mensagem %> ", "Erro")
+            toastr["error"]("<%= mensagem %> ", "Erro").css({
+            width: "1200px",
+            "max-width": "1200px"
+        })
       };
     </script>
 </asp:Content>

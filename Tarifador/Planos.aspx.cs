@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -11,6 +8,7 @@ namespace Tarifador
     public partial class Planos : System.Web.UI.Page
     {
         int planoID;
+        public string mensagem = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -19,8 +17,6 @@ namespace Tarifador
             }
             
         }
-        
-
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
@@ -51,14 +47,14 @@ namespace Tarifador
                     planotarifacao pla = ctx.planotarifacaos.First(p => p.id == planoID);
                     ctx.planotarifacaos.Remove(pla);
                     ctx.SaveChanges();
-                    GridView1.DataSource = new tarifador().GetPlanotarifacaos();
+                    GridView1.DataSource = new tarifador().getPlanos();
                     GridView1.DataBind();
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    mensagem = "Ocorreu o seguinte erro ao tentar exluir: " + ex.Message;
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-                    //throw;
                 }
             }
                 

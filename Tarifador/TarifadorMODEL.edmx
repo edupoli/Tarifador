@@ -15,6 +15,7 @@
           <Property Name="src" Type="varchar" MaxLength="255" />
           <Property Name="dst" Type="varchar" MaxLength="255" />
           <Property Name="tempo" Type="varchar" MaxLength="45" />
+          <Property Name="duration" Type="varchar" MaxLength="45" />
           <Property Name="tipoChamada" Type="varchar" MaxLength="255" />
           <Property Name="canal" Type="varchar" MaxLength="255" />
           <Property Name="valor" Type="decimal" Precision="7" Scale="2" />
@@ -74,7 +75,6 @@
           <Property Name="numero" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="grupoRamalID" Type="int" Nullable="false" />
           <Property Name="usuarioID" Type="int" Nullable="false" />
-          <Property Name="servidor" Type="varchar" MaxLength="255" />
           <Property Name="observacao" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="tronco">
@@ -260,6 +260,7 @@
           <Property Name="tipoChamada" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="canal" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="valor" Type="Decimal" />
+          <Property Name="duration" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="gruporamal">
           <Key>
@@ -325,7 +326,6 @@
           <Property Name="numero" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="grupoRamalID" Type="Int32" Nullable="false" />
           <Property Name="usuarioID" Type="Int32" Nullable="false" />
-          <Property Name="servidor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="observacao" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="gruporamal" Relationship="Self.grupoRamalID" FromRole="ramal" ToRole="gruporamal" />
           <NavigationProperty Name="usuario" Relationship="Self.usuarioID" FromRole="ramal" ToRole="usuario" />
@@ -510,6 +510,7 @@
           <EntitySetMapping Name="bilhetes">
             <EntityTypeMapping TypeName="tarifadorModel.bilhete">
               <MappingFragment StoreEntitySet="bilhetes">
+                <ScalarProperty Name="duration" ColumnName="duration" />
                 <ScalarProperty Name="idcdr" ColumnName="idcdr" />
                 <ScalarProperty Name="calldate" ColumnName="calldate" />
                 <ScalarProperty Name="cnam" ColumnName="cnam" />
@@ -581,7 +582,6 @@
                 <ScalarProperty Name="numero" ColumnName="numero" />
                 <ScalarProperty Name="grupoRamalID" ColumnName="grupoRamalID" />
                 <ScalarProperty Name="usuarioID" ColumnName="usuarioID" />
-                <ScalarProperty Name="servidor" ColumnName="servidor" />
                 <ScalarProperty Name="observacao" ColumnName="observacao" />
               </MappingFragment>
             </EntityTypeMapping>

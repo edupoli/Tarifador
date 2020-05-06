@@ -98,7 +98,8 @@ namespace Tarifador
         {
             string conec = "SERVER=10.0.2.128;UID=admin;PWD=ask%123;Allow User Variables=True";
             MySqlConnection conn = new MySqlConnection(conec);
-            string query = string.Format("SELECT HOUR(calldate) AS hora, count(*) AS total FROM asteriskcdrdb.cdr WHERE calldate >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) GROUP BY hora ORDER BY hora DESC limit 24");
+            string query = string.Format("SELECT HOUR(calldate) AS hora, count(*) AS total FROM asteriskcdrdb.cdr WHERE calldate between concat(curdate(), ' 00:00:00') and concat(curdate(),' 23:59:59') GROUP BY hora ORDER BY hora DESC");
+            //string query = string.Format("SELECT HOUR(calldate) AS hora, count(*) AS total FROM asteriskcdrdb.cdr WHERE calldate >= DATE_SUB(CURDATE(), INTERVAL 1 DAY) GROUP BY hora ORDER BY hora DESC limit 24");
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = query;
             cmd.CommandType = CommandType.Text;

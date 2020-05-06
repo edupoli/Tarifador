@@ -48,7 +48,6 @@ namespace Tarifador
                     ra.numero = numero.Text.Trim();
                     ra.grupoRamalID = int.Parse(cboxGrupoRamais.SelectedValue);
                     ra.usuarioID = int.Parse(cboxUsuario.SelectedValue);
-                    ra.servidor = servidor.Text.Trim();
                     ra.observacao = observacao.Text.Trim();
                     ctx.ramals.Add(ra);
                     ctx.SaveChanges();
@@ -77,8 +76,6 @@ namespace Tarifador
             numero.Text = ra.numero;
             cboxGrupoRamais.SelectedValue = Convert.ToString(ra.grupoRamalID);
             cboxUsuario.SelectedValue = Convert.ToString(ra.usuarioID);
-            servidor.Text = ra.servidor;
-
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Tarifador
     public partial class GrupoRamais : System.Web.UI.Page
     {
         string ramalID;
+        public string mensagem = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -61,7 +62,8 @@ namespace Tarifador
                 }
                 catch (Exception ex)
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
+                    mensagem = "Ocorreu o Seguinte erro ao Excluir: " + ex.Message;
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
                     //throw (ex);
                 }
             }

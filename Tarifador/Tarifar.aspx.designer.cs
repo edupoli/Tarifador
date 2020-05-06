@@ -49,15 +49,6 @@ namespace Tarifador {
         protected global::System.Web.UI.WebControls.DropDownList cboxCanal;
         
         /// <summary>
-        /// Controle btnConsultar.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnConsultar;
-        
-        /// <summary>
         /// Controle btnBilhetar.
         /// </summary>
         /// <remarks>
@@ -65,6 +56,24 @@ namespace Tarifador {
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnBilhetar;
+        
+        /// <summary>
+        /// Controle btnBilhetarGeral.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBilhetarGeral;
+        
+        /// <summary>
+        /// Controle btnRetarifar.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRetarifar;
         
         /// <summary>
         /// Controle GridView1.

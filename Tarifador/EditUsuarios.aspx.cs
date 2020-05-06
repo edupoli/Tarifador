@@ -13,6 +13,7 @@ namespace Tarifador
         int usuarioID;
         public string mensagem;
         string image;
+        string password;
         protected void Page_Load(object sender, EventArgs e)
         {
             usuarioID = Convert.ToInt32(Request.QueryString["usuarioID"]);
@@ -32,6 +33,7 @@ namespace Tarifador
                 }
                 getUsuarios(usuarioID);
             }
+            password = senha.Text;
             lblCaminhoImg.Visible = false;
         }
 
@@ -44,43 +46,17 @@ namespace Tarifador
                 nome.Focus();
             }
             else
-                if (email.Text == "")
-            {
-                mensagem = "O Campo e-mail é obrigatório";
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
-                email.Focus();
-            }
-            else
-                if (login.Text == "")
-            {
-                mensagem = "O Campo Login é obrigatório";
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
-                login.Focus();
-            }
-            else
-                if (senha.Text == "")
-            {
-                mensagem = "O Campo senha é obrigatório";
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
-                senha.Focus();
-            }
-            else
-                if (cargo.Text == "")
-            {
-                mensagem = "O Campo Cargo é obrigatório";
-                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
-                cargo.Focus();
-            }
-            else
+                
             {
                 try
                 {
+                    string senhaCriptografada = Criptografia.CalculaHash(password);
                     tarifadorEntities ctx = new tarifadorEntities();
                     usuario user = ctx.usuarios.First(p => p.id == usuarioID);
                     user.nome = nome.Text.Trim();
                     user.emaill = email.Text.Trim();
                     user.login = login.Text.Trim();
-                    user.senha = senha.Text.Trim();
+                    user.senha = senhaCriptografada;
                     user.perfil = cboxPerfil.SelectedValue;
                     user.grupoUserID = int.Parse(cboxGrupo.SelectedValue);
                     user.img = lblCaminhoImg.Text;
@@ -90,10 +66,10 @@ namespace Tarifador
 
 
                 }
-                catch (Exception)
+                catch (System.Exception ex)
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
-                    throw;
+                    mensagem = "Erro ao Editar " + ex.Message;
+                    ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
                 }
             }
                 
@@ -174,7 +150,8 @@ namespace Tarifador
                                 }
                                 catch (Exception ex)
                                 {
-
+                                    mensagem = "Erro ao Fazer Upload da Imagem " + ex.Message;
+                                    ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
                                 }
                                 // Mensagem se tudo ocorreu bem
                                 imgSel.ImageUrl = "dist/img/users/" + image;
@@ -226,9 +203,10 @@ namespace Tarifador
                 string s = data.ToString().Replace("/", "").Replace(":", "").Replace(" ", "");
                 return Convert.ToInt64(s);
             }
-            catch (Exception erro)
+            catch (Exception ex)
             {
-
+                mensagem = "Ocorreu o Seguinte erro: " + ex.Message;
+                ClientScript.RegisterStartupScript(GetType(), "Popup", "NotificacaoErro();", true);
                 throw;
             }
         }

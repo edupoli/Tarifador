@@ -41,7 +41,6 @@ namespace Tarifador
                     ra.numero = numero.Text.Trim();
                     ra.grupoRamalID = int.Parse(cboxGrupoRamais.SelectedValue);
                     ra.usuarioID = int.Parse(cboxUsuario.SelectedValue);
-                    ra.servidor = servidor.Text.Trim();
                     ra.observacao = observacao.Text.Trim();
                     ctx.ramals.Add(ra);
                     ctx.SaveChanges();
@@ -59,6 +58,11 @@ namespace Tarifador
         protected void btnVoltar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Ramais.aspx");
+        }
+
+        protected void btnAddUsuario_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddUsuarios.aspx");
         }
     }
 }
