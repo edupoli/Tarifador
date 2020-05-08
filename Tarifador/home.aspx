@@ -348,17 +348,14 @@
     <script src="dist/js/pages/dashboard3.js"></script>
     <script>
         $(function () {
-
-        var ticksStyle = {
+            var ticksStyle = {
             fontColor: '#495057',
             fontStyle: 'bold'
             }
             var mode = 'index'
             var intersect = true
-        
-        
-        var ctx = $('#edu1-chart');
-        var chartGraph = new Chart(ctx, {
+            var ctx = $('#edu1-chart');
+            var chartGraph = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ["00h", "01h", "02h", "03h", "04h", "05h", "06h", "07h", "08h", "09h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h", "19h", "20h", "21h", "22h", "23h"],
@@ -385,116 +382,116 @@
                 ]
             },
             options: {
-      maintainAspectRatio: false,
-      tooltips           : {
-        mode     : mode,
-        intersect: intersect
-      },
-      hover              : {
-        mode     : mode,
-        intersect: intersect
-      },
-      legend             : {
-        display: false
-      },
-      scales             : {
-        yAxes: [{
-          // display: false,
-          gridLines: {
-            display      : true,
-            lineWidth    : '4px',
-            color        : 'rgba(0, 0, 0, .2)',
-            zeroLineColor: 'transparent'
-          },
-          ticks    : $.extend({
-            beginAtZero : true,
-            suggestedMax: 200
-          }, ticksStyle)
-        }],
-        xAxes: [{
-          display  : true,
-          gridLines: {
-            display: false
-          },
-          ticks    : ticksStyle
-        }]
-      }
-    }
+              maintainAspectRatio: false,
+              tooltips           : {
+                mode     : mode,
+                intersect: intersect
+              },
+              hover              : {
+                mode     : mode,
+                intersect: intersect
+              },
+              legend             : {
+                display: false
+              },
+              scales             : {
+                yAxes: [{
+                  // display: false,
+                  gridLines: {
+                    display      : true,
+                    lineWidth    : '4px',
+                    color        : 'rgba(0, 0, 0, .2)',
+                    zeroLineColor: 'transparent'
+                  },
+                  ticks    : $.extend({
+                    beginAtZero : true,
+                    suggestedMax: 200
+                  }, ticksStyle)
+                }],
+                xAxes: [{
+                  display  : true,
+                  gridLines: {
+                    display: false
+                  },
+                  ticks    : ticksStyle
+                }]
+              }
+            }
         });
         });
 
     </script>
     <script>
         $(function () {
-    var ticksStyle = {
-        fontColor: '#495057',
-        fontStyle: 'bold'
-        }
-    var mode = 'index'
-    var intersect = true
-    var $salesChart = $('#sales-chart1')
-  var salesChart  = new Chart($salesChart, {
-    type   : 'bar',
-    data   : {
-      labels  : ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'],
-      datasets: [
-        {
-          backgroundColor: '#007bff',
-          borderColor    : '#007bff',
-          data           : <%=Newtonsoft.Json.JsonConvert.SerializeObject(Data3)%>,
-        },
-        {
-          backgroundColor: '#ced4da',
-          borderColor    : '#ced4da',
-          data           : <%=Newtonsoft.Json.JsonConvert.SerializeObject(Data4)%>,
-        }
-      ]
-    },
-    options: {
-      maintainAspectRatio: false,
-      tooltips           : {
-        mode     : mode,
-        intersect: intersect
-      },
-      hover              : {
-        mode     : mode,
-        intersect: intersect
-      },
-      legend             : {
-        display: false
-      },
-      scales             : {
-        yAxes: [{
-          // display: false,
-          gridLines: {
-            display      : true,
-            lineWidth    : '4px',
-            color        : 'rgba(0, 0, 0, .2)',
-            zeroLineColor: 'transparent'
-          },
-          ticks    : $.extend({
-            beginAtZero: true,
+            var ticksStyle = {
+                fontColor: '#495057',
+                fontStyle: 'bold'
+                }
+            var mode = 'index'
+            var intersect = true
+            var $salesChart = $('#sales-chart1')
+            var salesChart  = new Chart($salesChart, {
+            type   : 'bar',
+            data   : {
+              labels  : ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'],
+              datasets: [
+                {
+                  backgroundColor: '#007bff',
+                  borderColor    : '#007bff',
+                  data           : <%=Newtonsoft.Json.JsonConvert.SerializeObject(Data3)%>,
+                },
+                {
+                  backgroundColor: '#ced4da',
+                  borderColor    : '#ced4da',
+                  data           : <%=Newtonsoft.Json.JsonConvert.SerializeObject(Data4)%>,
+                }
+              ]
+            },
+            options: {
+              maintainAspectRatio: false,
+              tooltips           : {
+                mode     : mode,
+                intersect: intersect
+              },
+              hover              : {
+                mode     : mode,
+                intersect: intersect
+              },
+              legend             : {
+                display: false
+              },
+              scales             : {
+                yAxes: [{
+                  // display: false,
+                  gridLines: {
+                    display      : true,
+                    lineWidth    : '4px',
+                    color        : 'rgba(0, 0, 0, .2)',
+                    zeroLineColor: 'transparent'
+                  },
+                  ticks    : $.extend({
+                    beginAtZero: true,
 
-            // Include a dollar sign in the ticks
-            callback: function (value, index, values) {
-              if (value >= 1000) {
-                value /= 1000
-                value += 'k'
+                    // Include a dollar sign in the ticks
+                    callback: function (value, index, values) {
+                      if (value >= 1000) {
+                        value /= 1000
+                        value += 'k'
+                      }
+                      return '' + value
+                    }
+                  }, ticksStyle)
+                }],
+                xAxes: [{
+                  display  : true,
+                  gridLines: {
+                    display: false
+                  },
+                  ticks    : ticksStyle
+                }]
               }
-              return '' + value
             }
-          }, ticksStyle)
-        }],
-        xAxes: [{
-          display  : true,
-          gridLines: {
-            display: false
-          },
-          ticks    : ticksStyle
-        }]
-      }
-    }
-  })
+          })
         })
     </script>
 

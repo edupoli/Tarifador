@@ -6,10 +6,11 @@ namespace Tarifador
 {
     public partial class login : System.Web.UI.Page
     {
-        Conexao con = new Conexao();
+        string conecLocal = "SERVER=10.0.2.9;UID=ura;PWD=ask123;Allow User Variables=True;Pooling=False";
         string user;
         string password;
         public string mensagem = string.Empty;
+        int logado = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             user = usuario.Text.Trim();
@@ -18,6 +19,8 @@ namespace Tarifador
 
         protected void btnEntrar_Click(object sender, EventArgs e)
         {
+            MySqlConnection con = new MySqlConnection(conecLocal);
+            con.Open();
             if (usuario.Text.Trim() == "" || senha.Text.Trim() == "" || senha.Text == string.Empty)
             {
                 mensagem = "Favor informar Usuário e senha para login!!";
@@ -30,10 +33,9 @@ namespace Tarifador
                     string senhaCriptografada = Criptografia.CalculaHash(password);
                     string sql = "Select * from tarifador.usuario where login='" + user + "' and senha='" + senhaCriptografada + "'";
                     MySqlCommand cmd;
-                    con.AbrirCon();
                     DataTable dt = new DataTable();
                     MySqlDataAdapter da = new MySqlDataAdapter();
-                    cmd = new MySqlCommand(sql, con.con2);
+                    cmd = new MySqlCommand(sql, con);
                     da.SelectCommand = cmd;
                     da.Fill(dt);
 
@@ -46,12 +48,15 @@ namespace Tarifador
                         Session["img"] = dt.Rows[0][7].ToString();
                         Session["cargo"] = dt.Rows[0][8].ToString();
                         Session["id"] = dt.Rows[0][0].ToString();
-                        Response.Redirect("home.aspx");
+                        dt.Dispose();
+                        logado = 1;
+                        
                     }
                     else
                     {
                         Session["logado"] = "NAO";
                         mensagem = "Usuário ou senha Inválidos!!";
+                        logado = 0;
                         ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
                     }
                 }
@@ -60,6 +65,14 @@ namespace Tarifador
                     mensagem = "Ocorreu o seguinte erro: "+ ex.Message;
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "erro();", true);
                 }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            if (logado ==1)
+            {
+                Response.Redirect("home.aspx");
             }
         }
     }

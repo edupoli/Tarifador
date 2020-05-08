@@ -50,7 +50,7 @@
                       <label>Grupo de Ramais</label>
                         <asp:DropDownList runat="server" ID="cboxGrupoRamais" CssClass="form-control" DataSourceID="SqlDataSourceGrupoRamais" DataTextField="nome" DataValueField="id">
                         </asp:DropDownList>
-                        <asp:SqlDataSource ID="SqlDataSourceGrupoRamais" runat="server" ConnectionString="<%$ ConnectionStrings:tarifadorConnectionString %>" ProviderName="<%$ ConnectionStrings:tarifadorConnectionString.ProviderName %>" SelectCommand="SELECT id, nome FROM gruporamal"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSourceGrupoRamais" runat="server" ConnectionString="<%$ ConnectionStrings:tarifadorConnectionString %>" ProviderName="<%$ ConnectionStrings:tarifadorConnectionString.ProviderName %>" SelectCommand="SELECT id, nome FROM gruporamal order by nome"></asp:SqlDataSource>
                     </div>
                 </div>
                 <div class="col">
@@ -58,13 +58,14 @@
                   <label>Usuário</label>
                     <asp:DropDownList runat="server" ID="cboxUsuario" CssClass="form-control" DataSourceID="SqlDataSourceGrupoUsuarios" DataTextField="nome" DataValueField="id">
                     </asp:DropDownList>
-                    <asp:SqlDataSource ID="SqlDataSourceGrupoUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:tarifadorConnectionString %>" ProviderName="<%$ ConnectionStrings:tarifadorConnectionString.ProviderName %>" SelectCommand="SELECT id, nome, emaill, login, senha, perfil, grupoUserID FROM usuario"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSourceGrupoUsuarios" runat="server" ConnectionString="<%$ ConnectionStrings:tarifadorConnectionString %>" ProviderName="<%$ ConnectionStrings:tarifadorConnectionString.ProviderName %>" SelectCommand="SELECT id, nome, emaill, login, senha, perfil, grupoUserID FROM usuario order by nome"></asp:SqlDataSource>
                 </div>
                 </div>
                   <div class="col">
                     <div class="form-group">
-                      <label>Servidor</label>
-                        <asp:TextBox runat="server" ID="servidor" CssClass="form-control"  />
+                      <label>Cadastrar</label>
+                        <asp:Button Text="Cadastrar Novo Usuário" CssClass="btn btn-primary form-control" runat="server" ID="btnAddUsuario" OnClick="btnAddUsuario_Click"/>
+                        
                     </div>
                 </div>
                 

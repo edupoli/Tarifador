@@ -22,11 +22,7 @@
   <!-- Toastr -->
   <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css"/>
 
-    <script type="text/javascript">
-        function erro() {
-            toastr.error('<%=mensagem%>')
-        };
-    </script>
+    
 
 </head>
 <body class="hold-transition login-page">
@@ -98,16 +94,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="Scripts/toastr.min.js"></script>
- <script type="text/javascript">
-     function erro() {
-         $.toast({
-    heading: 'Information',
-    text: 'Now you can add icons to generate different kinds of toasts',
-    showHideTransition: 'slide',
-    icon: 'info'
-})
-     }
-      </script>
+
+    
+    
+    <script>
+        $(function erro() {
+            toastr.error('<%=mensagem%>')
+        });
+    </script>
 
     
 </body>

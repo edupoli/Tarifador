@@ -49,12 +49,9 @@ namespace Tarifador
                     ra.grupoRamalID = int.Parse(cboxGrupoRamais.SelectedValue);
                     ra.usuarioID = int.Parse(cboxUsuario.SelectedValue);
                     ra.observacao = observacao.Text.Trim();
-                    ctx.ramals.Add(ra);
                     ctx.SaveChanges();
                     ClientScript.RegisterStartupScript(GetType(), "Popup", "sucesso();", true);
-                    numero.Text = string.Empty;
-                    servidor.Text = string.Empty;
-                    observacao.Text = string.Empty;
+
                 }
                 catch (Exception)
                 {
@@ -76,6 +73,12 @@ namespace Tarifador
             numero.Text = ra.numero;
             cboxGrupoRamais.SelectedValue = Convert.ToString(ra.grupoRamalID);
             cboxUsuario.SelectedValue = Convert.ToString(ra.usuarioID);
+            observacao.Text = ra.observacao;
+        }
+
+        protected void btnAddUsuario_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AddUsuarios.aspx");
         }
     }
 }
